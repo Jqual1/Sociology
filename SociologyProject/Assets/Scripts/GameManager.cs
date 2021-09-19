@@ -7,8 +7,17 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    //money 
     public GameObject moneyTextBox;
     public int money;
+    //capital
+    public int parents;
+    public int teachers;
+    public int faculty;
+    public int students;
+    public int community;
+
     private int morality;
     private int openPolicy;
 
@@ -43,17 +52,20 @@ public class GameManager : MonoBehaviour
 
     public Canvas dialoguecanvas;
     public Canvas canvas;
-  
 
+    // Unsure why the school policies comments are in the middle of the code?
+    // *Cameron said he didn't remember why, so we will keep them there for now.
+    // Should we attempt to combine the different parts of each policy together in the code to make it more readable?
+    // This works for now, but what if we want to make this better y'know?
     private string[] policyTitle = new string[] {
         "Free Lunch Program",
         "Extended Bus Routes",
         "Voucher System",
-        "FAFSA", 
-        "Career and Technical Education Program", 
-        "Establish Magnet Schools", 
-        "Federal Cultural Competency Training", 
-        "Title IX Training", 
+        "FAFSA",
+        "Career and Technical Education Program",
+        "Establish Magnet Schools",
+        "Federal Cultural Competency Training",
+        "Title IX Training",
         "After School Program",
     // school policies 
         "School Resource Officer (SRO)",
@@ -77,7 +89,7 @@ public class GameManager : MonoBehaviour
         "Require all schools to follow the guidelines of Title IX relating to discrimination based on sex.",
         "Fund schools to host programs for students who may not be able to return home immediately after school.",
     // school policies 
-     "Give your school a School Resource Officer (SRO)",
+        "Give your school a School Resource Officer (SRO)",
         "Enact a dress code policy",
         "Create a zero tolerance disoplinary policy",
         "Create Critical Conversation Spaces for students",
@@ -107,6 +119,16 @@ public class GameManager : MonoBehaviour
         0,
         0,
         0};
+
+    // This will replace the money system
+    // This is how to do 2D arrays in C#
+    private int[,] policyCostN = new int[,] {
+    //{ teachers, faculty, parents, students, community }
+      { 20, 42, 29, 0, 100 },
+      { 40, 21, 14, 10, 40 },
+      { 21, 49, 10, 70, 20 }
+    };
+
     private bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
 
    
@@ -145,7 +167,29 @@ public class GameManager : MonoBehaviour
         moneyTextBox.GetComponent<TextMeshProUGUI>().text = "Money: " + money.ToString();
     }
 
-    public void ChangeMOrality(int amount)
+    //new system for changing capital
+    public void ChangeCapital(int[] amount)
+	{
+        // REMINDER { teachers, faculty, parents, students, community }
+
+        teachers = teachers + amount[0];
+        if (teachers > 100) { teachers = 100; }
+        if (teachers < 0) { teachers = 0; }
+        faculty = faculty + amount[1];
+        if (faculty > 100) { faculty = 100; }
+        if (faculty < 0) { faculty = 0; }
+        parents = parents + amount[2];
+        if (parents > 100) { parents = 100; }
+        if (parents < 0) { parents = 0; }
+        students = students + amount[3];
+        if (students > 100) { students = 100; }
+        if (students < 0) { students = 0; }
+        community = community + amount[4];
+        if (community > 100) { community = 100; }
+        if (community < 0) { community = 0; }
+    }
+
+    public void ChangeMorality(int amount)
     {
         morality = morality + amount;
     }
