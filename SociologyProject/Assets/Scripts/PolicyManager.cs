@@ -43,7 +43,7 @@ public class PolicyManager : MonoBehaviour
 
         }
     }
-    
+    // Using the same code as in the GameManager? Why are there so many managers? 
     private string[] policyTitle = new string[] {
         "Free Lunch Program",
         "Extended Bus Routes",
