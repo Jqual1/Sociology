@@ -147,6 +147,7 @@ public class GameController : MonoBehaviour
         
     }
 
+    // Old System, Will have to add in a new ChangeCapital
     public void ChangeMoney(int amount)
     {
         money += amount;
@@ -250,7 +251,8 @@ public class GameController : MonoBehaviour
             yield return null;
         }
     }
-
+    // Is this just the same thing as GameManager?????????????
+    // Why are both using some of the same code?
     private string[] policyTitle = new string[] {
         "Free Lunch Program",
         "Extended Bus Routes",
