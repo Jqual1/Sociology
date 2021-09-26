@@ -43,7 +43,8 @@ public class PolicyManager : MonoBehaviour
 
         }
     }
-    // Using the same code as in the GameManager? Why are there so many managers? 
+
+    // This is the Old System, It will be replaced with a 2D string array to make it easier to read and edit each policy.
     private string[] policyTitle = new string[] {
         "Free Lunch Program",
         "Extended Bus Routes",
@@ -106,6 +107,58 @@ public class PolicyManager : MonoBehaviour
         0,
         0,
         0};
+
+    // Unsure why the school policies comments are in the middle of the code?
+    // *Cameron said he didn't remember why, so we will keep them there for now.
+    // Should we attempt to combine the different parts of each policy together in the code to make it more readable?
+    // This works for now, but what if we want to make this better y'know?
+
+    private string[,] policy = new string[,]
+    {
+        // I think it would be best to use a 2D array like this to better group everything together and make it more readable.
+        // 2D Arrays are superior
+        {"Free Lunch Program",                      "The government pays for free lunches for public schools"},
+        {"Extended Bus Routes",                     "Bus routes have a longer reach to pick up kids living further from schools"},
+        {"Voucher System",                          "Allows public money to follow students to private schools"},
+        {"FAFSA",                                   "Provides financial support for students pursuing higher education based on need."},
+        {"Career and Technical Education Program",  "Establish an Office of Civil Rights in the CTE that works to close the discrimination gap in STEM fields."},
+        {"Establish Magnet Schools",                "Allow for publicly funded schools that draw students from a variety of school districts under a specialized curriculum."},
+        {"Federal Cultural Competency Training",    "A government funded program that will support schools with cultural competency training should they request it."},
+        {"Title IX Training",                       "Require all schools to follow the guidelines of Title IX relating to discrimination based on sex."},
+        {"After School Program",                    "Fund schools to host programs for students who may not be able to return home immediately after school."},
+        {"School Resource Officer (SRO)",           "Give your school a School Resource Officer (SRO)"},
+        {"Dress Code",                              "Enact a dress code policy"},
+        {"Zero Tolerance Disciplin",                "Create a zero tolerance disoplinary policy"},
+        {"Critical Conversation Space",             "Create Critical Conversation Spaces for students"},
+        {"IQ testing",                              "Use IQ testing to select kids for gift education services"},
+        {"6",                                       "6"},
+        {"7",                                       "7"},
+        {"8",                                       "8"},
+        {"9",                                       "9"}
+    };
+    // This will replace the money system
+    // This is how to do 2D arrays in C#
+    private int[,] policyCostN = new int[,] {
+    //{ teachers, faculty, parents, students, community }
+      { 20, 42, 29, 0, 100 },   // Free Lunch Program
+      { 40, 21, 14, 10, 40 },   // Extended Bus Routes
+      { 40, 21, 14, 10, 40 },   // Voucher System
+      { 40, 21, 14, 10, 40 },   // FAFSA
+      { 40, 21, 14, 10, 40 },   // Career and Technical Education Program
+      { 40, 21, 14, 10, 40 },   // Establish Magnet Schools
+      { 40, 21, 14, 10, 40 },   // Federal Cultural Competency Training
+      { 40, 21, 14, 10, 40 },   // Title IX Training
+      { 40, 21, 14, 10, 40 },   // After School Program
+      { 40, 21, 14, 10, 40 },   // School Resource Officer (SRO)
+      { 40, 21, 14, 10, 40 },   // Dress Code
+      { 40, 21, 14, 10, 40 },   // Zero Tolerance Disciplin
+      { 40, 21, 14, 10, 40 },   // Critical Conversation Space
+      { 40, 21, 14, 10, 40 },   // IQ testing
+      { 40, 21, 14, 10, 40 },   // 6
+      { 40, 21, 14, 10, 40 },   // 7
+      { 40, 21, 14, 10, 40 },   // 8
+      { 21, 49, 10, 70, 20 }    // 9
+    };
 
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
 
