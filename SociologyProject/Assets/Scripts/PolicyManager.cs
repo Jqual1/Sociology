@@ -15,8 +15,7 @@ public class PolicyManager : MonoBehaviour
     public Canvas dialogueCanvas;
     private AudioSource clickSound;
 
-    public GameObject moneyTextBox;
-    //public int money;
+    //public GameObject moneyTextBox;
 
     public GameObject policyTextBox;
     private Coroutine dialogueCo;
@@ -44,49 +43,7 @@ public class PolicyManager : MonoBehaviour
         }
     }
 
-    // This is the Old System, It will be replaced with a 2D string array to make it easier to read and edit each policy.
-    private string[] policyTitle = new string[] {
-        "Free Lunch Program",
-        "Extended Bus Routes",
-        "Voucher System",
-        "FAFSA",
-        "Career and Technical Education Program",
-        "Establish Magnet Schools",
-        "Federal Cultural Competency Training",
-        "Title IX Training",
-        "After School Program",
-    // school policies 
-        "School Resource Officer (SRO)",
-        "Dress Code",
-        "Zero Tolerance Disciplin",
-        "Critical Conversation Space",
-        "IQ testing",
-        "6",
-        "7",
-        "8",
-        "9"
-    };
-    private string[] policyDescription = new string[] {
-        "The government pays for free lunches for public schools. \n \nCost: 2000",
-        "Bus routes have a longer reach to pick up kids living further from schools. \n \nCost: 1500",
-        "Allows public money to follow students to private schools. \n \nCost: 1000",
-        "Provides financial support for students pursuing higher education based on need. \n \nCost: 1500",
-        "Establish an Office of Civil Rights in the CTE that works to close the discrimination gap in STEM fields. \n \nCost: 2000",
-        "Allow for publicly funded schools that draw students from a variety of school districts under a special curriculum. \n \nCost: 2000",
-        "A government funded program that will support schools with cultural competency training should they request it. \n \nCost: 2000",
-        "Require all schools to follow the guidelines of Title IX relating to discrimination based on sex. \n \nCost: 1500",
-        "Fund schools to host programs for students who may not be able to return home immediately after school. \n \nCost: 1000",
-    // school policies 
-     "Give your school a School Resource Officer (SRO)",
-        "Enact a dress code policy",
-        "Create a zero tolerance disoplinary policy",
-        "Create Critical Conversation Spaces for students",
-        "Use IQ testing to select kids for gift education services",
-        "6",
-        "7",
-        "8",
-        "9"
-    };
+ // Old System that uses Money for the cost
     private int[] policyCost = new int[] {
         2000,
         1500,
@@ -140,43 +97,45 @@ public class PolicyManager : MonoBehaviour
     // This is how to do 2D arrays in C#
     private int[,] policyCostN = new int[,] {
     //{ teachers, faculty, parents, students, community }
-      { 20, 42, 29, 0, 100 },   // Free Lunch Program
-      { 40, 21, 14, 10, 40 },   // Extended Bus Routes
-      { 40, 21, 14, 10, 40 },   // Voucher System
-      { 40, 21, 14, 10, 40 },   // FAFSA
-      { 40, 21, 14, 10, 40 },   // Career and Technical Education Program
-      { 40, 21, 14, 10, 40 },   // Establish Magnet Schools
-      { 40, 21, 14, 10, 40 },   // Federal Cultural Competency Training
-      { 40, 21, 14, 10, 40 },   // Title IX Training
-      { 40, 21, 14, 10, 40 },   // After School Program
-      { 40, 21, 14, 10, 40 },   // School Resource Officer (SRO)
-      { 40, 21, 14, 10, 40 },   // Dress Code
-      { 40, 21, 14, 10, 40 },   // Zero Tolerance Disciplin
-      { 40, 21, 14, 10, 40 },   // Critical Conversation Space
-      { 40, 21, 14, 10, 40 },   // IQ testing
-      { 40, 21, 14, 10, 40 },   // 6
-      { 40, 21, 14, 10, 40 },   // 7
-      { 40, 21, 14, 10, 40 },   // 8
-      { 21, 49, 10, 70, 20 }    // 9
+      { 0, 0, 0, 0, 0 },   // Free Lunch Program
+      { 0, 0, 0, 0, 0 },   // Extended Bus Routes
+      { 0, 0, 0, 0, 0 },   // Voucher System
+      { 0, 0, 0, 0, 0 },   // FAFSA
+      { 0, 0, 0, 0, 0 },   // Career and Technical Education Program
+      { 0, 0, 0, 0, 0 },   // Establish Magnet Schools
+      { 0, 0, 0, 0, 0 },   // Federal Cultural Competency Training
+      { 0, 0, 0, 0, 0 },   // Title IX Training
+      { 0, 0, 0, 0, 0 },   // After School Program
+      { 0, 0, 0, 0, 0 },   // School Resource Officer (SRO)
+      { 0, 0, 0, 0, 0 },   // Dress Code
+      { 0, 0, 0, 0, 0 },   // Zero Tolerance Disciplin
+      { 0, 0, 0, 0, 0 },   // Critical Conversation Space
+      { 0, 0, 0, 0, 0 },   // IQ testing
+      { 0, 0, 0, 0, 0 },   // 6
+      { 0, 0, 0, 0, 0 },   // 7
+      { 0, 0, 0, 0, 0 },   // 8
+      { 0, 0, 0, 0, 0 }    // 9
     };
 
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
 
     public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
 
-    public string getPolicyTitle(int policyNumber) { return policyTitle[policyNumber]; }
-    public string getPolicyDescription(int policyNumber) { return policyDescription[policyNumber]; }
+    public void policyPReset()
+	{
+        policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+    }
+
+    public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }
+    public string getPolicyDescription(int policyNumber) { return policy[policyNumber, 1]; }
     public int getPolicyCost(int policyNumber) { return policyCost[policyNumber]; }
     public bool getPolicyPurchased(int policyNumber) { return policyPurchased[policyNumber]; }
-
-    //public void printPolicyPurchased(int policyNumber) { Debug.Log(policyPurchased[policyNumber]); }
 
 
     public void OpenPolicy()
     {
         dialogueCanvas.enabled = false;
         policyCanvas.enabled = true;
-       // cutScene.enabled = false;
         policyAnimator.SetBool("isOpen", true);
     }
 
@@ -184,7 +143,6 @@ public class PolicyManager : MonoBehaviour
     {
         dialogueCanvas.enabled = true;
         policyCanvas.enabled = false;
-        //cutScene.enabled = false;
         policyAnimator.SetBool("isOpen", false);
     }
 
@@ -236,7 +194,7 @@ public class PolicyManager : MonoBehaviour
     public bool IsActive(string title)
     {
         Debug.Log(title);
-        return policyPurchased[Array.IndexOf(policyTitle, title)];
+        return policyPurchased[Array.IndexOf(policy, title)];
     }
 
     public void PlayClickSound()

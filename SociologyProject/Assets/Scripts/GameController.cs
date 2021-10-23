@@ -21,14 +21,9 @@ public class GameController : MonoBehaviour
     private int community;
 
     public int progress;
-    private int openPolicy;
-    //public DialogueController dialogueController; // Needed to start dialogue
     public GameObject mainMenu;
     public GameObject endScreen;
-   // public GameObject policyScreen;
 
-    //public int curChapterIndex;
-    //public GameObject[] chapters;
     public DialogueViewer dialogueViewer;
     public GameObject pauseMenu;
     public bool gamePaused = false;
@@ -40,7 +35,6 @@ public class GameController : MonoBehaviour
 
     public List<Policy> schoolPolicies = new List<Policy>();
     [SerializeField] TextAsset policies;
-    // bool isPlaying = false;
 
     private void Awake()
     {
@@ -62,8 +56,8 @@ public class GameController : MonoBehaviour
         progress = 0;
         PolicyObject policyObject = new PolicyObject();
         
-        if (macLineEndings) { delimeter = "\n"; }
-        schoolPolicies = policyObject.ParsePolicies(policies, delimeter);
+        //if (macLineEndings) { delimeter = "\n"; }
+        //schoolPolicies = policyObject.ParsePolicies(policies, delimeter);
         foreach (Policy policy in schoolPolicies)
         {
             Debug.Log("Name: " + policy.name);
@@ -108,6 +102,7 @@ public class GameController : MonoBehaviour
         //chapters[curChapterIndex].SetActive(true);
         dialogueViewer.InitializeDialogue();
 
+        List<Policy> activeSchoolPolicies = new List<Policy>();
         money = 0;
         ChangeMoney(1000);
         progress = 0;
@@ -115,16 +110,6 @@ public class GameController : MonoBehaviour
         // isPlaying = true;
         // TODO: Reset purchased policies
     }
-
-    /*public void NextChapter()
-    {
-        if (curChapterIndex < chapters.Length - 1)
-        {
-            chapters[curChapterIndex].SetActive(false);
-            chapters[curChapterIndex].SetActive(true);
-        }
-
-    }*/
 
     public void Pause()
     {
@@ -147,6 +132,11 @@ public class GameController : MonoBehaviour
         //policyScreen.SetActive(false);
         progress = 0;
         money = 1000;
+        parents = 50;
+        teachers = 50;
+        faculty = 50;
+        students = 50;
+        community = 50;
         ChangeMoney(0);
     }
 
@@ -163,105 +153,6 @@ public class GameController : MonoBehaviour
         money += amount;
         moneyTextBox.GetComponent<TextMeshProUGUI>().text = money.ToString();
     }
-
-    public void ChangeProgress(int amount)
-    {
-        progress += amount;
-    }
-
-    public Policy FindPolicy(string name)
-    {
-        foreach (Policy policy in schoolPolicies)
-        {
-            if (policy.name == name) return policy;
-        }
-        return null;
-    }
-
-    public bool IsActiveSchoolPolicy(string policyName)
-    {
-        foreach (Policy policy in activeSchoolPolicies)
-        {
-            if (policy.name == policyName)
-                return true;
-        }
-        return false;
-    }
-
-    public bool IsAvailable(string policyName)
-    {
-        Policy policy = FindPolicy(policyName);
-        return IsEnoughMoney(policy) && ConditionsMet(policy);
-    }
-
-    private bool IsEnoughMoney(Policy policy)
-    {
-        return policy.cost <= money;
-    }
-
-    private bool ConditionsMet(Policy policy)
-    {
-        foreach (string condition in policy.requires)
-        {
-            if (!PolicyManager.Instance.IsActive(condition)) { return false; }
-        }
-        return true;
-    }
-
-    public void ActivatePolicy(Policy policy)
-    {
-        foreach ((string Name, int Value) action in policy.actions)
-        {
-            if (action.Name == "money")
-            {
-                ChangeMoney(action.Value);
-            }
-            else
-            {
-                ChangeProgress(action.Value);
-            }
-        }
-        activeSchoolPolicies.Add(policy);
-    }
-
-    /*public void StartGame()
-    {
-        mainMenu.SetActive(false);
-        dialogueController.StartDialogue();
-    }*/
-
-    // Policy stuff
-    public void purchasePolicy()
-    {
-        if (money >= getPolicyCost(openPolicy))
-        {
-            ChangeMoney(getPolicyCost(openPolicy) * -1);
-            policyPurchased[openPolicy] = true;
-            Debug.Log("Purchased Policy " + openPolicy);
-        }
-    }
-
-    public void activePolicy(int policyNumber)
-    {
-        openPolicy = policyNumber;
-    }
-    
-    public string getPolicyTitle(int policyNumber) { return policyManager.getPolicyTitle(policyNumber); }
-    public string getPolicyDescription(int policyNumber) { return policyManager.getPolicyDescription(policyNumber); }
-    public int getPolicyCost(int policyNumber) { return policyManager.getPolicyCost(policyNumber); }
-    public bool getPolicyPurchased(int policyNumber) { return policyManager.getPolicyPurchased(policyNumber); }
-
-
-    public IEnumerator LoadYourAsyncScene(string scene)
-    {        
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
-
     //new system for changing capital
     public void ChangeCapital(int[] amount)
     {
@@ -284,12 +175,82 @@ public class GameController : MonoBehaviour
         if (community < 0) { community = 0; }
     }
 
-    private bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+    public void ChangeProgress(int amount)
+    {
+        progress += amount;
+    }
+
+    public Policy FindPolicy(string name)
+    {
+        foreach (Policy policy in schoolPolicies)
+        {
+            if (policy.name == name)
+            { 
+                return policy;
+            }
+        }
+        return null;
+    }
+
+    public bool IsActiveSchoolPolicy(string policyName)
+    {
+        foreach (Policy policy in activeSchoolPolicies)
+        {
+            if (policy.name == policyName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsAvailable(string policyName)
+    {
+        Policy policy = FindPolicy(policyName);
+        return IsEnoughMoney(policy) && ConditionsMet(policy);
+    }
+
+    private bool IsEnoughMoney(Policy policy)
+    {
+        return policy.cost <= money;
+    }
+
+    private bool ConditionsMet(Policy policy)
+    {
+        foreach (string condition in policy.requires)
+        {
+            if (!PolicyManager.Instance.IsActive(condition)) 
+            { 
+                return false; 
+            }
+        }
+        return true;
+    }
+
+    public void ActivatePolicy(Policy policy)
+    {
+        foreach ((string Name, int Value) action in policy.actions)
+        {
+            if (action.Name == "money")
+            {
+                ChangeMoney(action.Value);
+            }
+            else
+            {
+                ChangeProgress(action.Value);
+            }
+        }
+        activeSchoolPolicies.Add(policy);
+    }
 
 
-    //public bool IsActive(string title)
-    //{
-     //   Debug.Log(title);
-    //    return policyPurchased[Array.IndexOf(policyTitle, title)];
-   // }
+    public IEnumerator LoadYourAsyncScene(string scene)
+    {        
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
 }

@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
         //transition to chapter 1 background
         
 
-        chapter1Dialogue[0] = "Welcome to @itsmaya, an exploration into the variety of decisions that will affect students of color.";
+        chapter1Dialogue[0] = "Welcome to @itsmaya, an exploration into the variety of decisions that will affect a black girl named Maya.";
         chapter1Dialogue[1] = "You will have the opportunity to allocate money at a federal level. These policies will affect students all over the country.";
         chapter1Dialogue[2] = "You will also have the ability to step into the shoes of individuals whose daily decisions have a personal affect on students of color.";
         chapter1Dialogue[3] = "Do what you feel is right, and try to make the best of the system that's in place. Good luck!";
