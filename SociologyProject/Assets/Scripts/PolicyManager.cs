@@ -97,18 +97,18 @@ public class PolicyManager : MonoBehaviour
     // This is how to do 2D arrays in C#
     private int[,] policyCostN = new int[,] {
     //{ teachers, faculty, parents, students, community }
-      { 0, 0, 0, 0, 0 },   // Free Lunch Program
+      { 10, 10, 20, 20, 5 },   // Free Lunch Program
       { 0, 0, 0, 0, 0 },   // Extended Bus Routes
       { 0, 0, 0, 0, 0 },   // Voucher System
       { 0, 0, 0, 0, 0 },   // FAFSA
       { 0, 0, 0, 0, 0 },   // Career and Technical Education Program
       { 0, 0, 0, 0, 0 },   // Establish Magnet Schools
-      { 0, 0, 0, 0, 0 },   // Federal Cultural Competency Training
+      { 10, 0, -20, 0, 0 },   // Federal Cultural Competency Training
       { 0, 0, 0, 0, 0 },   // Title IX Training
       { 0, 0, 0, 0, 0 },   // After School Program
       { 0, 0, 0, 0, 0 },   // School Resource Officer (SRO)
-      { 0, 0, 0, 0, 0 },   // Dress Code
-      { 0, 0, 0, 0, 0 },   // Zero Tolerance Disciplin
+      { 0, 0, 0, -25, 0 },   // Dress Code
+      { 0, 0, 0, -25, 0 },   // Zero Tolerance Disciplin
       { 0, 0, 0, 0, 0 },   // Critical Conversation Space
       { 0, 0, 0, 0, 0 },   // IQ testing
       { 0, 0, 0, 0, 0 },   // 6

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using static PolicyObject;
+using UnityEngine.Audio;
 
 public class GameController : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class GameController : MonoBehaviour
 
     public List<Policy> schoolPolicies = new List<Policy>();
     [SerializeField] TextAsset policies;
+
+    //Sounds
+    public AudioMixer mixer;
+    public GameObject volumeButton;
+    public GameObject volumeSlider;
 
     private void Awake()
     {
@@ -252,5 +258,24 @@ public class GameController : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    // Volume Controls
+    // Activates the volume slider by clicking the icon
+    public void volumeOnClick()
+    {
+        if (volumeSlider.activeSelf == true)
+        {
+            volumeSlider.SetActive(false);
+        }
+        else
+        {
+            volumeSlider.SetActive(true);
+        }
+    }
+    // Sets the volume using the slider
+    public void setVolume(float sliderValue)
+    {
+        mixer.SetFloat("masterVol", (Mathf.Log10(sliderValue) * 20));
     }
 }
