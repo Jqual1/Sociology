@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 {
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
+    public GameObject moneyGraphic;
     public GameObject moneyTextBox;
     public int money;
     //capital
@@ -101,6 +102,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        moneyGraphic.SetActive(true);
         mainMenu.SetActive(false);
         // TODO: Add assertion
         //curChapterIndex = 0;
@@ -150,7 +152,7 @@ public class GameController : MonoBehaviour
     {
         endScreen.SetActive(true);
         mainMenu.SetActive(false);
-        
+        moneyGraphic.SetActive(false);
     }
 
     // Old System, Will have to add in a new ChangeCapital
