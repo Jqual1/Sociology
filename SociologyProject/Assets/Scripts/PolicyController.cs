@@ -6,7 +6,8 @@ public class PolicyController : MonoBehaviour
 {
     public Animator policyAnimator;
     public GameObject staticElements;
-    
+    public GameObject capitalButton;
+
     public DialogueViewer dialogueViewer;
 
     // Start is called before the first frame update
@@ -26,13 +27,15 @@ public class PolicyController : MonoBehaviour
     {
         policyAnimator.SetBool("isOpen", true);
         staticElements.SetActive(true);
+        capitalButton.SetActive(true);
     }
 
     public void ClosePolicy()
     {
         policyAnimator.SetBool("isOpen", false);
         staticElements.SetActive(false);
-        StartCoroutine(OnAnimationComplete());        
+        StartCoroutine(OnAnimationComplete());
+        capitalButton.SetActive(false);
     }
 
     // https://gamedev.stackexchange.com/questions/117423/unity-detect-animations-end

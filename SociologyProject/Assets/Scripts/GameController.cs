@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using static PolicyObject;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -16,11 +17,11 @@ public class GameController : MonoBehaviour
     public GameObject moneyTextBox;
     public int money;
     //capital
-    private int parents;
-    private int teachers;
-    private int faculty;
-    private int students;
-    private int community;
+    private int teachers, faculty, parents, students, community;
+    public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
+    public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
+    int[] capArr;
+    public GameObject capitalScreen;
 
     public int progress;
     public GameObject mainMenu;
@@ -60,6 +61,12 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        capArr = new int[]{ teachers, faculty, parents, students, community };
+        for (int i = 0; i < 5; i++)
+		{
+            capArr[i] = 50;
+		}
+        UpdateCapital();
         progress = 0;
         PolicyObject policyObject = new PolicyObject();
         
@@ -164,24 +171,55 @@ public class GameController : MonoBehaviour
     //new system for changing capital
     public void ChangeCapital(int[] amount)
     {
-        // REMINDER { teachers, faculty, parents, students, community }
+		// REMINDER { teachers, faculty, parents, students, community }
 
-        teachers = teachers + amount[0];
-        if (teachers > 100) { teachers = 100; }
-        if (teachers < 0) { teachers = 0; }
-        faculty = faculty + amount[1];
-        if (faculty > 100) { faculty = 100; }
-        if (faculty < 0) { faculty = 0; }
-        parents = parents + amount[2];
-        if (parents > 100) { parents = 100; }
-        if (parents < 0) { parents = 0; }
-        students = students + amount[3];
-        if (students > 100) { students = 100; }
-        if (students < 0) { students = 0; }
-        community = community + amount[4];
-        if (community > 100) { community = 100; }
-        if (community < 0) { community = 0; }
+		for( int i = 0; i < 5; i++ )
+		{
+            capArr[i] = capArr[i] + amount[i];
+            if (capArr[i] > 100) { capArr[i] = 100; }
+            if (capArr[i] < 0) { capArr[i] = 0; }
+        }
+        UpdateCapital();
     }
+    public void UpdateCapital()
+	{
+        Image[] capEmoArr = new Image[] { teaEmo, facEmo, parEmo, stuEmo, comEmo };
+        Sprite[] emoArr = new Sprite[] { sadEmo, mehEmo, midEmo, okayEmo, happyEmo };
+		for( int i = 0; i < 5; i++ )
+		{
+			if (capArr[i] <= 20)
+			{
+                capEmoArr[i].sprite = emoArr[0];
+			}
+            else if (capArr[i] <= 40)
+            {
+                capEmoArr[i].sprite = emoArr[1];
+            }
+            else if (capArr[i] <= 60)
+            {
+                capEmoArr[i].sprite = emoArr[2];
+            }
+            else if (capArr[i] <= 80)
+            {
+                capEmoArr[i].sprite = emoArr[3];
+            }
+            else
+            {
+                capEmoArr[i].sprite = emoArr[4];
+            }
+        }
+	}
+    public void ToggleCapital()
+	{
+        if(capitalScreen.activeInHierarchy)
+		{
+            capitalScreen.SetActive(false);
+		}
+        else
+		{
+            capitalScreen.SetActive(true);
+		}
+	}
 
     public void ChangeProgress(int amount)
     {
