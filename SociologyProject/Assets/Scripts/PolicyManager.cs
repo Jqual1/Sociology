@@ -62,20 +62,20 @@ public class PolicyManager : MonoBehaviour
     };
 
     private int[,] policyCostN = new int[,] {
-    // { teachers, faculty, parents, students, community }
-      { 0, 0, 0, 0, 0 },   // Extended Bus Routes
-      { 0, 0, 0, 0, 0 },   // Voucher System
-      { 0, 0, 0, 0, 0 },   // FAFSA
-      { 0, 0, 0, 0, 0 },   // Career and Technical Education Program
-      { 0, 0, 0, 0, 0 },   // Establish Magnet Schools
-      { 10, 0, -20, -41, 0 },   // Federal Cultural Competency Training
-      { 0, 0, 0, 0, 0 },   // Title IX Training
-      { 0, 0, 0, 0, 0 },   // After School Program
-      { 0, 0, 0, 0, 0 },   // School Resource Officer (SRO)
-      { -11, 0, 0, -25, 0 },   // Dress Code
-      { 0, 0, 0, -25, 0 },   // Zero Tolerance Disciplin
-      { 0, 0, 0, 0, 0 },   // Critical Conversation Space
-      { 0, 0, 0, 0, 0 }   // IQ testing
+    // { teachers, faculty, parents, students, community, Maya}
+      { 0, 0, 0, 0, 0, 0 },   // Extended Bus Routes
+      { 0, 0, 0, 0, 0, 0 },   // Voucher System
+      { 0, 0, 0, 0, 0, 0 },   // FAFSA
+      { 0, 0, 0, 0, 0, 0 },   // Career and Technical Education Program
+      { 0, 0, 0, 0, 0, 0 },   // Establish Magnet Schools
+      { 10, 0, -20, -41, 0, 0 },   // Federal Cultural Competency Training
+      { 0, 0, 0, 0, 0, 0 },   // Title IX Training
+      { 0, 0, 0, 0, 0, 0 },   // After School Program
+      { 0, 0, 0, 0, 0, 0 },   // School Resource Officer (SRO)
+      { -11, 0, 0, -25, 0, 0 },   // Dress Code
+      { 0, 0, 0, -25, 0, 0 },   // Zero Tolerance Disciplin
+      { 0, 0, 0, 0, 0, 0 },   // Critical Conversation Space
+      { 0, 0, 0, 0, 0, 0 }   // IQ testing
     };
 
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};

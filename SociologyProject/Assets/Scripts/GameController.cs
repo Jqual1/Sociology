@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject moneyTextBox;
     public int money;
     // Capital
-    private int teachers, faculty, parents, students, community;
+    private int teachers, faculty, parents, students, community, Maya;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
     public int[] capArr;
@@ -157,9 +157,9 @@ public class GameController : MonoBehaviour
     // New system for changing capital
     public void ChangeCapital(int[] amount)
     {
-		// REMINDER { teachers, faculty, parents, students, community }
+		// REMINDER { teachers, faculty, parents, students, community, Maya }
 
-		for( int i = 0; i < 5; i++ )
+		for( int i = 0; i < 6; i++ )
 		{
             capArr[i] = capArr[i] + amount[i];
             if (capArr[i] > 100) { capArr[i] = 100; }
@@ -194,6 +194,7 @@ public class GameController : MonoBehaviour
                 capEmoArr[i].sprite = emoArr[4];
             }
         }
+
 	}
     public void ToggleCapital()
 	{
