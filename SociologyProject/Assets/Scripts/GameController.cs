@@ -13,14 +13,14 @@ public class GameController : MonoBehaviour
 {
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
-    public GameObject moneyGraphic;
+    //public GameObject moneyGraphic;
     public GameObject moneyTextBox;
     public int money;
     //capital
     private int teachers, faculty, parents, students, community;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
-    int[] capArr;
+    public int[] capArr;
     public GameObject capitalScreen;
 
     public int progress;
@@ -71,14 +71,7 @@ public class GameController : MonoBehaviour
         PolicyObject policyObject = new PolicyObject();
         
         //if (macLineEndings) { delimeter = "\n"; }
-        //schoolPolicies = policyObject.ParsePolicies(policies, delimeter);
-        foreach (Policy policy in schoolPolicies)
-        {
-            Debug.Log("Name: " + policy.name);
-            Debug.Log("Cost: " + policy.cost);
-            Debug.Log("--");
-
-        }
+        schoolPolicies = policyObject.ParsePolicies(policies, delimeter);
 
         mainMenu.SetActive(true);
         pauseMenu.SetActive(false);
@@ -109,7 +102,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        moneyGraphic.SetActive(true);
+        //moneyGraphic.SetActive(true);
         mainMenu.SetActive(false);
         // TODO: Add assertion
         //curChapterIndex = 0;
@@ -159,7 +152,7 @@ public class GameController : MonoBehaviour
     {
         endScreen.SetActive(true);
         mainMenu.SetActive(false);
-        moneyGraphic.SetActive(false);
+        //moneyGraphic.SetActive(false);
     }
 
     // Old System, Will have to add in a new ChangeCapital
@@ -221,9 +214,9 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-    public void ChangeProgress(int amount)
+    public void ChangeProgress(int[] amount)
     {
-        progress += amount;
+        progress += amount[0];
     }
 
     public Policy FindPolicy(string name)
@@ -275,11 +268,11 @@ public class GameController : MonoBehaviour
 
     public void ActivatePolicy(Policy policy)
     {
-        foreach ((string Name, int Value) action in policy.actions)
+        foreach ((string Name, int[] Value) action in policy.actions)
         {
             if (action.Name == "money")
             {
-                ChangeMoney(action.Value);
+                ChangeCapital(action.Value);
             }
             else
             {

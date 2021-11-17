@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PolicyManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class PolicyManager : MonoBehaviour
 
     private int openPolicy;
     public GameObject[] policyButtons;
+
+    private bool policyPurchasedThisRound = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,7 @@ public class PolicyManager : MonoBehaviour
 
  // Old System that uses Money for the cost
     private int[] policyCost = new int[] {
-        2000,
+        500,
         1500,
         1000,
         2000,
@@ -97,17 +100,17 @@ public class PolicyManager : MonoBehaviour
     // This is how to do 2D arrays in C#
     private int[,] policyCostN = new int[,] {
     //{ teachers, faculty, parents, students, community }
-      { 10, 10, 20, 20, 5 },   // Free Lunch Program
+      { 10, 10, 20, -10, 5 },   // Free Lunch Program
       { 0, 0, 0, 0, 0 },   // Extended Bus Routes
       { 0, 0, 0, 0, 0 },   // Voucher System
       { 0, 0, 0, 0, 0 },   // FAFSA
       { 0, 0, 0, 0, 0 },   // Career and Technical Education Program
       { 0, 0, 0, 0, 0 },   // Establish Magnet Schools
-      { 10, 0, -20, 0, 0 },   // Federal Cultural Competency Training
+      { 10, 0, -20, -41, 0 },   // Federal Cultural Competency Training
       { 0, 0, 0, 0, 0 },   // Title IX Training
       { 0, 0, 0, 0, 0 },   // After School Program
       { 0, 0, 0, 0, 0 },   // School Resource Officer (SRO)
-      { 0, 0, 0, -25, 0 },   // Dress Code
+      { -11, 0, 0, -25, 0 },   // Dress Code
       { 0, 0, 0, -25, 0 },   // Zero Tolerance Disciplin
       { 0, 0, 0, 0, 0 },   // Critical Conversation Space
       { 0, 0, 0, 0, 0 },   // IQ testing
@@ -117,6 +120,10 @@ public class PolicyManager : MonoBehaviour
       { 0, 0, 0, 0, 0 }    // 9
     };
 
+    private string[] titles = new string[] { "Free Lunch Program" , "Extended Bus Routes" ,
+        "Voucher System", "FAFSA", "Career and Technical Education Program" , "Establish Magnet Schools" ,"Federal Cultural Competency Training",
+    "Title IX Training","After School Program","School Resource Officer (SRO)","Dress Code","Zero Tolerance Disciplin","Critical Conversation Space",
+    "IQ testing","6","7","8","9"};
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
 
     public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
@@ -148,13 +155,28 @@ public class PolicyManager : MonoBehaviour
 
     public void purchasePolicy()
     {
-        if (GameController.Instance.money >= policyCost[openPolicy] && !policyPurchased[openPolicy])
+        bool canBuy = true;
+        int[] currentCapital = GameController.Instance.capArr;
+        int[] policyCapitalCost = GetRow(policyCostN, openPolicy);
+        for(int i = 0; i<5; i++)
         {
-            GameController.Instance.ChangeMoney(policyCost[openPolicy] * -1);
-            GameController.Instance.ChangeProgress(policyBenefit[openPolicy]);
+            if (policyCapitalCost[i] < 0)
+            {
+                if (policyCapitalCost[i]*-1 > currentCapital[i])
+                {
+                    canBuy = false;
+                    break;
+                }
+            }
+        }
+        if (canBuy && !policyPurchasedThisRound)
+        {
+            //GameController.Instance.ChangeMoney(policyCost[openPolicy] * -1);//Maybe need to do stuff here
+            GameController.Instance.ChangeCapital(GetRow(policyCostN, openPolicy));
+            GameController.Instance.ChangeProgress(new int[] { policyBenefit[openPolicy] });
             policyPurchased[openPolicy] = true;
             policyButtons[openPolicy].GetComponent<Image>().color = Color.white;
-            Debug.Log("Purchased Policy " + openPolicy);
+            policyPurchasedThisRound = true;
         }
     }
 
@@ -166,7 +188,6 @@ public class PolicyManager : MonoBehaviour
     public void PolicyClicked(int policyNumber)
     {
         StartDialogue(getPolicyDescription(policyNumber));
-        Debug.Log("hey I know the Policy Number: " + policyNumber);
     }
 
     public void StartDialogue(string text)
@@ -178,7 +199,6 @@ public class PolicyManager : MonoBehaviour
 
     IEnumerator typeText(string text)
     {
-        Debug.Log(text);
         policyTextBox.GetComponent<TextMeshProUGUI>().text = "";
         foreach (char c in text.ToCharArray())
         {
@@ -193,12 +213,26 @@ public class PolicyManager : MonoBehaviour
     }
     public bool IsActive(string title)
     {
-        Debug.Log(title);
-        return policyPurchased[Array.IndexOf(policy, title)];
+        return policyPurchased[Array.IndexOf(titles, title)];
     }
 
     public void PlayClickSound()
     {
         clickSound.Play();
+    }
+
+
+    //https://www.codegrepper.com/code-examples/csharp/select+a+whole+row+out+of+a+2d+array+C%23
+    public int[] GetRow(int[,] matrix, int rowNumber)
+    {
+        return Enumerable.Range(0, matrix.GetLength(1))
+                .Select(x => matrix[rowNumber, x])
+                .ToArray();
+    }
+
+
+    public void resetPickedThisRound()
+    {
+        policyPurchasedThisRound = false;
     }
 }

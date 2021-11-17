@@ -246,7 +246,10 @@ public class DialogueViewer : MonoBehaviour
         {
             if (dialogueController.GetCurrentNode().responses.Count > 1)
             {
-                
+                foreach(Response r in dialogueController.GetCurrentNode().responses)
+                {
+                    Debug.Log(r.displayText);
+                }
                 ShowChoices(dialogueController.GetCurrentNode().responses);
                 Debug.Log("Reached responses: ");
                 foreach (Response response in dialogueController.GetCurrentNode().responses)

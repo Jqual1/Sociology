@@ -65,7 +65,7 @@ public class DialogueObject
             return nodes[titleOfStartNode];
         }
 
-        public void ParseTwineText(TextAsset twineText, string delimeter)
+        public void ParseTwineText(TextAsset twineText, string delimeter) 
         {
             string text = twineText.text;
             string[] nodeData = text.Split(new string[] { "::" }, StringSplitOptions.None);
