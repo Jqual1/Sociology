@@ -13,10 +13,9 @@ public class GameController : MonoBehaviour
 {
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
-    //public GameObject moneyGraphic;
     public GameObject moneyTextBox;
     public int money;
-    //capital
+    // Capital
     private int teachers, faculty, parents, students, community;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
@@ -39,7 +38,7 @@ public class GameController : MonoBehaviour
     public List<Policy> schoolPolicies = new List<Policy>();
     [SerializeField] TextAsset policies;
 
-    //Sounds
+    // Sounds
     public AudioMixer mixer;
     public GameObject volumeButton;
     public GameObject volumeSlider;
@@ -94,12 +93,6 @@ public class GameController : MonoBehaviour
             }
         }
     }
-
-    /*public GameObject GetCurChapter()
-    {
-        return chapters[curChapterIndex];
-    }*/
-
     public void StartGame()
     {
         //moneyGraphic.SetActive(true);
@@ -161,7 +154,7 @@ public class GameController : MonoBehaviour
         money += amount;
         moneyTextBox.GetComponent<TextMeshProUGUI>().text = money.ToString();
     }
-    //new system for changing capital
+    // New system for changing capital
     public void ChangeCapital(int[] amount)
     {
 		// REMINDER { teachers, faculty, parents, students, community }

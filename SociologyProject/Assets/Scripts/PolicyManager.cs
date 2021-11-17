@@ -16,8 +16,6 @@ public class PolicyManager : MonoBehaviour
     public Canvas dialogueCanvas;
     private AudioSource clickSound;
 
-    //public GameObject moneyTextBox;
-
     public GameObject policyTextBox;
     private Coroutine dialogueCo;
 
@@ -46,38 +44,8 @@ public class PolicyManager : MonoBehaviour
         }
     }
 
- // Old System that uses Money for the cost
-    private int[] policyCost = new int[] {
-        500,
-        1500,
-        1000,
-        2000,
-        1500,
-        2000,
-        2000,
-        1500,
-        1000,
-        //school policies
-        2000,
-        1500,
-        1200,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0};
-
-    // Unsure why the school policies comments are in the middle of the code?
-    // *Cameron said he didn't remember why, so we will keep them there for now.
-    // Should we attempt to combine the different parts of each policy together in the code to make it more readable?
-    // This works for now, but what if we want to make this better y'know?
-
     private string[,] policy = new string[,]
     {
-        // I think it would be best to use a 2D array like this to better group everything together and make it more readable.
-        // 2D Arrays are superior
-        {"Free Lunch Program",                      "The government pays for free lunches for public schools"},
         {"Extended Bus Routes",                     "Bus routes have a longer reach to pick up kids living further from schools"},
         {"Voucher System",                          "Allows public money to follow students to private schools"},
         {"FAFSA",                                   "Provides financial support for students pursuing higher education based on need."},
@@ -90,17 +58,11 @@ public class PolicyManager : MonoBehaviour
         {"Dress Code",                              "Enact a dress code policy"},
         {"Zero Tolerance Disciplin",                "Create a zero tolerance disoplinary policy"},
         {"Critical Conversation Space",             "Create Critical Conversation Spaces for students"},
-        {"IQ testing",                              "Use IQ testing to select kids for gift education services"},
-        {"6",                                       "6"},
-        {"7",                                       "7"},
-        {"8",                                       "8"},
-        {"9",                                       "9"}
+        {"IQ testing",                              "Use IQ testing to select kids for gift education services"}
     };
-    // This will replace the money system
-    // This is how to do 2D arrays in C#
+
     private int[,] policyCostN = new int[,] {
-    //{ teachers, faculty, parents, students, community }
-      { 10, 10, 20, -10, 5 },   // Free Lunch Program
+    // { teachers, faculty, parents, students, community }
       { 0, 0, 0, 0, 0 },   // Extended Bus Routes
       { 0, 0, 0, 0, 0 },   // Voucher System
       { 0, 0, 0, 0, 0 },   // FAFSA
@@ -113,29 +75,20 @@ public class PolicyManager : MonoBehaviour
       { -11, 0, 0, -25, 0 },   // Dress Code
       { 0, 0, 0, -25, 0 },   // Zero Tolerance Disciplin
       { 0, 0, 0, 0, 0 },   // Critical Conversation Space
-      { 0, 0, 0, 0, 0 },   // IQ testing
-      { 0, 0, 0, 0, 0 },   // 6
-      { 0, 0, 0, 0, 0 },   // 7
-      { 0, 0, 0, 0, 0 },   // 8
-      { 0, 0, 0, 0, 0 }    // 9
+      { 0, 0, 0, 0, 0 }   // IQ testing
     };
 
-    private string[] titles = new string[] { "Free Lunch Program" , "Extended Bus Routes" ,
-        "Voucher System", "FAFSA", "Career and Technical Education Program" , "Establish Magnet Schools" ,"Federal Cultural Competency Training",
-    "Title IX Training","After School Program","School Resource Officer (SRO)","Dress Code","Zero Tolerance Disciplin","Critical Conversation Space",
-    "IQ testing","6","7","8","9"};
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
 
-    public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+    public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false };
 
     public void policyPReset()
 	{
-        policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+        policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false };
     }
 
     public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }
     public string getPolicyDescription(int policyNumber) { return policy[policyNumber, 1]; }
-    public int getPolicyCost(int policyNumber) { return policyCost[policyNumber]; }
     public bool getPolicyPurchased(int policyNumber) { return policyPurchased[policyNumber]; }
 
 
@@ -171,7 +124,6 @@ public class PolicyManager : MonoBehaviour
         }
         if (canBuy && !policyPurchasedThisRound)
         {
-            //GameController.Instance.ChangeMoney(policyCost[openPolicy] * -1);//Maybe need to do stuff here
             GameController.Instance.ChangeCapital(GetRow(policyCostN, openPolicy));
             GameController.Instance.ChangeProgress(new int[] { policyBenefit[openPolicy] });
             policyPurchased[openPolicy] = true;
@@ -193,7 +145,6 @@ public class PolicyManager : MonoBehaviour
     public void StartDialogue(string text)
     {
         StopAllCoroutines();
-        //GameController.Instance.StopAllCoroutines();
         dialogueCo = StartCoroutine(typeText(text));
     }
 
@@ -213,7 +164,14 @@ public class PolicyManager : MonoBehaviour
     }
     public bool IsActive(string title)
     {
-        return policyPurchased[Array.IndexOf(titles, title)];
+        for ( int i = 0; i < policyPurchased.Length; i++ )
+		{
+            if (policy[i,0].Equals(title))
+			{
+                return policyPurchased[i];
+			}
+		}
+        return policyPurchased[0];
     }
 
     public void PlayClickSound()
