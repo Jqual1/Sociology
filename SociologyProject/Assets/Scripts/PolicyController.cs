@@ -6,7 +6,6 @@ public class PolicyController : MonoBehaviour
 {
     public Animator policyAnimator;
     public GameObject staticElements;
-    public GameObject capitalButton;
 
     public DialogueViewer dialogueViewer;
 
@@ -27,7 +26,6 @@ public class PolicyController : MonoBehaviour
     {
         policyAnimator.SetBool("isOpen", true);
         staticElements.SetActive(true);
-        capitalButton.SetActive(true);
     }
 
     public void ClosePolicy()
@@ -35,7 +33,6 @@ public class PolicyController : MonoBehaviour
         policyAnimator.SetBool("isOpen", false);
         staticElements.SetActive(false);
         StartCoroutine(OnAnimationComplete());
-        capitalButton.SetActive(false);
     }
 
     // https://gamedev.stackexchange.com/questions/117423/unity-detect-animations-end
