@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        capArr = new int[]{ teachers, faculty, parents, students, community };
+        capArr = new int[]{ teachers, faculty, parents, students, community, Maya };
         for (int i = 0; i < 5; i++)
 		{
             capArr[i] = 50;
