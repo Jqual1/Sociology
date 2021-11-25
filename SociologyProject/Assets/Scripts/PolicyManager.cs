@@ -80,7 +80,7 @@ public class PolicyManager : MonoBehaviour
 
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
 
-    public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false };
+    public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false};
 
     public void policyPReset()
 	{
@@ -90,21 +90,6 @@ public class PolicyManager : MonoBehaviour
     public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }
     public string getPolicyDescription(int policyNumber) { return policy[policyNumber, 1]; }
     public bool getPolicyPurchased(int policyNumber) { return policyPurchased[policyNumber]; }
-
-
-    public void OpenPolicy()
-    {
-        dialogueCanvas.enabled = false;
-        policyCanvas.enabled = true;
-        policyAnimator.SetBool("isOpen", true);
-    }
-
-    public void ClosePolicy()
-    {
-        dialogueCanvas.enabled = true;
-        policyCanvas.enabled = false;
-        policyAnimator.SetBool("isOpen", false);
-    }
 
     public void purchasePolicy()
     {
@@ -172,7 +157,7 @@ public class PolicyManager : MonoBehaviour
                 return policyPurchased[i];
 			}
 		}
-        return policyPurchased[0];
+        return false;
     }
 
     public void PlayClickSound()

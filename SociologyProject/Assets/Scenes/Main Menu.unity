@@ -2987,7 +2987,7 @@ MonoBehaviour:
   - {fileID: 1064943797}
   - {fileID: 1349451101}
   - {fileID: 1627277184}
-  policyPurchased: 000000000000000000000000000000000000
+  policyPurchased: 00000000000000000000000000
 --- !u!4 &564080771
 Transform:
   m_ObjectHideFlags: 0
@@ -3407,8 +3407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997f68b3e0dbf490f823e67f7970f4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyTextBox: {fileID: 1971041816}
-  money: 0
   teaEmo: {fileID: 1110287609}
   facEmo: {fileID: 496221362}
   parEmo: {fileID: 2081613520}
@@ -6328,7 +6326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 352, y: 193}
+  m_AnchoredPosition: {x: 352, y: 191.74}
   m_SizeDelta: {x: 450, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &812321101

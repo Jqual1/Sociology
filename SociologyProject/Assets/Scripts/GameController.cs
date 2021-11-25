@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour
 {
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
-    public GameObject moneyTextBox;
-    public int money;
     // Capital
     private int teachers, faculty, parents, students, community, Maya;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
@@ -64,7 +62,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         capArr = new int[]{ teachers, faculty, parents, students, community, Maya };
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
 		{
             capArr[i] = 50;
 		}
@@ -107,8 +105,6 @@ public class GameController : MonoBehaviour
         dialogueViewer.InitializeDialogue();
 
         List<Policy> activeSchoolPolicies = new List<Policy>();
-        money = 0;
-        ChangeMoney(1000);
         progress = 0;
 
         // isPlaying = true;
@@ -135,13 +131,11 @@ public class GameController : MonoBehaviour
         mainMenu.SetActive(true);
         //policyScreen.SetActive(false);
         progress = 0;
-        money = 1000;
         parents = 50;
         teachers = 50;
         faculty = 50;
         students = 50;
         community = 50;
-        ChangeMoney(0);
     }
 
     public void EndGame()
@@ -151,20 +145,14 @@ public class GameController : MonoBehaviour
         //moneyGraphic.SetActive(false);
     }
 
-    // Old System, Will have to add in a new ChangeCapital
-    public void ChangeMoney(int amount)
-    {
-        money += amount;
-        moneyTextBox.GetComponent<TextMeshProUGUI>().text = money.ToString();
-    }
     // New system for changing capital
     public void ChangeCapital(int[] amount)
     {
-		// REMINDER { teachers, faculty, parents, students, community, Maya }
-
+        // REMINDER { teachers, faculty, parents, students, community, Maya }
+        Debug.Log(amount[0]);
 		for( int i = 0; i < 6; i++ )
 		{
-            capArr[i] = capArr[i] + amount[i];
+            capArr[i] += amount[i];
             if (capArr[i] > 100) { capArr[i] = 100; }
             if (capArr[i] < 0) { capArr[i] = 0; }
         }
@@ -290,10 +278,10 @@ public class GameController : MonoBehaviour
         Policy policy = FindPolicy(policyName);
         return IsEnoughMoney(policy) && ConditionsMet(policy);
     }
-
+    // Phase out all money-related things. 
     private bool IsEnoughMoney(Policy policy)
     {
-        return policy.cost <= money;
+        return policy.cost <= 1000;
     }
 
     private bool ConditionsMet(Policy policy)
