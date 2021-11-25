@@ -19,8 +19,11 @@ public class GameController : MonoBehaviour
     private int teachers, faculty, parents, students, community, Maya;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
+    public Image teaCha, facCha, parCha, stuCha, comCha;
+    public Sprite doubleD, singleD, noChange, singleU, doubleU;
     public int[] capArr;
     public GameObject capitalScreen;
+    private bool capChangeBool = false;
 
     public int progress;
     public GameObject mainMenu;
@@ -196,6 +199,34 @@ public class GameController : MonoBehaviour
         }
 
 	}
+    public void UpdateChangeCap(int[] capChange)
+	{
+        Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
+        Sprite[] emoChangeArr = new Sprite[] { doubleD, singleD, noChange, singleU, doubleU };
+        for ( int i = 0; i < 5; i++ )
+		{
+            if( capChange[i] > 15)
+			{
+                capEmoArr[i].sprite = emoChangeArr[4];
+			}
+            else if (capChange[i] > 5)
+            {
+                capEmoArr[i].sprite = emoChangeArr[3];
+            }
+            else if (capChange[i] > -6)
+            {
+                capEmoArr[i].sprite = emoChangeArr[2];
+            }
+            else if (capChange[i] > -16)
+            {
+                capEmoArr[i].sprite = emoChangeArr[1];
+            }
+            else
+            {
+                capEmoArr[i].sprite = emoChangeArr[0];
+            }
+        }
+	}
     public void ToggleCapital()
 	{
         if(capitalScreen.activeInHierarchy)
@@ -208,7 +239,24 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-    public void ChangeProgress(int[] amount)
+    public void ToggleCapitalChange()
+	{
+        Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
+        for (int i = 0; i < 5; i++)
+		{
+            if(capChangeBool)
+			{
+                capEmoArr[i].transform.gameObject.SetActive(false);
+			}
+            else
+            {
+                capEmoArr[i].transform.gameObject.SetActive(true);
+            }
+        }
+        capChangeBool = !capChangeBool;
+    }
+
+	public void ChangeProgress(int[] amount)
     {
         progress += amount[0];
     }
