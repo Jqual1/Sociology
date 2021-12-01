@@ -1,21 +1,21 @@
 title,cost,prerequisite,progress,capital
-PBS,0,none,2,10 10 10 10 10
-STEM,10,none,1,10 10 10 10 10
-LowerGTRequirement,0,Free Lunch Program,2,10 10 10 10 10,The Free Lunch Program has not been purchased.
-ChangeGTSelection,0,none,-1,10 10 10 10 10
-DoAwayUniforms,0,none,0,10 10 10 10 10
-ContinueUniforms,0,none,0,10 10 10 10 10
-AdressIssue,0,none,1,10 10 10 10 10,Title IX policy has not been purchased
-StrictCode,0,none,-2,10 10 10 10 10
-Vouchers,0,Voucher System,2,10 10 10 10 10,The Voucher System policy has not been purchased.
-Suspensions,0,none,-3,10 10 10 10 10
-RequestTraining,0,Federal Cultural Competency Training,4,10 10 10 10 10,The Cultural Competency Training policy has not been purchased.
-OriginalTraining,0,none,-3,10 10 10 10 10
-AllowException,500,none,2,10 10 10 10 10,You do not have enough money (500) to implement this policy.
-SRO,0,none,-2,10 10 10 10 10
-FacultyInvolved,0,none,1,10 10 10 10 10
-LeavetoStudents,0,none,0,10 10 10 10 10
-MakeClub,500,none,2,10 10 10 10 10
-NoBudget,0,none,-2,10 10 10 10 10
-FootballTeam,0,none,1,10 10 10 10 10
-SmallerTeams,0,none,2,10 10 10 10 10
+PBS,0,none,2,10 5 0 10 0 10
+STEM,10,none,1,5 0 10 10 5 10
+LowerGTRequirement,0,Free Lunch Program,2,-10 5 -5 10 -5 5,The Free Lunch Program has not been purchased.
+ChangeGTSelection,0,none,-1,-5 0 -10 5 0 10
+DoAwayUniforms,0,none,0,-10 5 -5 10 -5 5
+ContinueUniforms,0,none,0,10 5 -5 -15 0 -10
+AdressIssue,0,none,1,-5 -5 5 10 5 10,Title IX policy has not been purchased
+StrictCode,0,none,-2,5 5 -5 -10 0 -10
+Vouchers,0,Voucher System,2,-5 -5 -5 5 0 10,The Voucher System policy has not been purchased.
+Suspensions,0,none,-3,0 0 0 -5 0 -10
+RequestTraining,0,Federal Cultural Competency Training,4,-5 -5 -5 5 -5 5,The Cultural Competency Training policy has not been purchased.
+OriginalTraining,0,none,-3,0 0 0 0 0 -10
+AllowException,500,none,2,-5 5 5 10 -5 5,You do not have enough money (500) to implement this policy.
+SRO,0,none,-2,10 5 -5 -5 -10 5 -5
+FacultyInvolved,0,none,1,5 5 -5 -5 5 5
+LeavetoStudents,0,none,0,-5 -5 5 5 -5 -5
+MakeClub,500,none,2,5 -5 5 5 5 5
+NoBudget,0,none,-2,0 5 0 -5 0 -5
+FootballTeam,0,none,1,5 10 5 5 5 -5
+SmallerTeams,0,none,2,5 5 5 0 5 10
