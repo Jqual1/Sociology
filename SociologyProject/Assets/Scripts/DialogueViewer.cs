@@ -174,21 +174,18 @@ public class DialogueViewer : MonoBehaviour
             policyController.OpenPolicy();
             //dialogueBoxController.policyButton.GetComponent<Button>().interactable = true;
         }
-        else
+        if (node.tags.Contains("Character"))
         {
-            if (node.tags.Contains("Character"))
-            {
-                OpenCharacters(node);
-                Debug.Log("Character Pop-Up!");
-            }
-            if (node.title == "Intro")
-            {
-                intro.SetActive(true);
-                Debug.Log("Intro");
-            }
-            passageController.InitializePassage(node);
-            //dialogueBoxController.policyButton.GetComponent<Button>().interactable = false; //
+            OpenCharacters(node);
+            Debug.Log("Character Pop-Up!");
         }
+        if (node.title == "Intro")
+        {
+            intro.SetActive(true);
+            Debug.Log("Intro");
+        }
+        passageController.InitializePassage(node);
+        //dialogueBoxController.policyButton.GetComponent<Button>().interactable = false; //
 
         // Actions
         Policy policy = GameController.Instance.FindPolicy(node.title);

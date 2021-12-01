@@ -30,12 +30,12 @@ Last year we had some discipline issues with the students. We were hoping to add
 Positive Behavior Supports[[PBS]]
 Students in STEM Training[[STEM]]
 
-:: PBS[Money]
+:: PBS[Character H]
 Thank you for letting us know! We will move forward with your selection.
 ...
 Next[[GT]]
 
-:: STEM[Money]
+:: STEM[Character H]
 Thank you for letting us know! We will move forward with your selection.
 ...
 Next[[GT]]
@@ -62,32 +62,32 @@ Who do you think we should hire?
 Mr. Johnson[[Johnson]]
 Mrs. Robinson[[Robinson]]
 
-:: LowerGTRequirement[Progress0]
+:: LowerGTRequirement[Character I]
 Hmm, we will do our best to make the appropriate changes. We will move forward with care.
 ...
 Next[[NewTeacher]]
 
-:: ChangeGTSelection[Progress2]
+:: ChangeGTSelection[Character I]
 Hmm, we will do our best to make the appropriate changes. We will move forward with care.
 ...
 Next[[NewTeacher]]
 
-:: Johnson[Money]
+:: Johnson[Character D]
 Thank you for your insight, we will take your choice into consideration.
 ...
 Next[[Uniforms]]
 
-:: Robinson[Money]
+:: Robinson[Character D]
 Thank you for your insight, we will take your choice into consideration.
 ...
 Next[[Uniforms]]
 
-:: DoAwayUniforms[PreCutScene]
+:: DoAwayUniforms[PreCutScene, Character B]
 Understood. I will write a short blurb in the newsletter addressing this.
 ...
 Next[[CutScenePoor]]
 
-:: ContinueUniforms[PreCutScene]
+:: ContinueUniforms[PreCutScene, Character B]
 Understood. I will write a short blurb in the newsletter addressing this.
 ...
 Next[[CutScenePoor]]
