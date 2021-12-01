@@ -10,7 +10,7 @@ Chapter1
 
 
 :: Intro[START]
-Welcome to itsmaya, an exploration into the variety of decisions that will affect students of color.
+Welcome to itsmaya, an exploration into the variety of decisions that will affect the life of Maya, a black girl growing up in the public school system.
 You will have the opportunity to allocate money at a federal level. These policies will affect students all over the country.
 You will also have the ability to step into the shoes of individuals whose daily decisions have a personal affect on students of color.
 Do what you feel is right, and try to make the best of the system that's in place. Good luck!
@@ -55,13 +55,30 @@ What are your thoughts?
 Do away with uniforms next year[[DoAwayUniforms]]
 Continue to require student uniforms[[ContinueUniforms]]
 
+:: NewTeacher[Character D]
+Principal Smith, we have decided on hiring a new teacher and would like your insight. We've narrowed our selection to two candidates.
+There is Mr. Johnson, a white male teacher with over ten years teaching experience, or Mrs. Robinson, a black female teacher who is new to teaching but shows promise.
+Who do you think we should hire? 
+Mr. Johnson[[Johnson]]
+Mrs. Robinson[[Robinson]]
+
 :: LowerGTRequirement[Progress0]
 Hmm, we will do our best to make the appropriate changes. We will move forward with care.
 ...
-Next[[Uniforms]]
+Next[[NewTeacher]]
 
 :: ChangeGTSelection[Progress2]
 Hmm, we will do our best to make the appropriate changes. We will move forward with care.
+...
+Next[[NewTeacher]]
+
+:: Johnson[Money]
+Thank you for your insight, we will take your choice into consideration.
+...
+Next[[Uniforms]]
+
+:: Robinson[Money]
+Thank you for your insight, we will take your choice into consideration.
 ...
 Next[[Uniforms]]
 

@@ -1403,9 +1403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 5
-  m_Text: 'Purchase
-
-'
+  m_Text: Enact
 --- !u!222 &306353905
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10875,7 +10873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9125839330140ed8297fd98594b7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  macLineEndings: 1
+  macLineEndings: 0
 --- !u!4 &1288752449
 Transform:
   m_ObjectHideFlags: 0
