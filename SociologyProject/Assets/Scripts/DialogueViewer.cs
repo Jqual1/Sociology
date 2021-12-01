@@ -244,6 +244,7 @@ public class DialogueViewer : MonoBehaviour
         }
         else
         {
+
             if (dialogueController.GetCurrentNode().responses.Count > 1)
             {
                 foreach(Response r in dialogueController.GetCurrentNode().responses)
@@ -257,7 +258,7 @@ public class DialogueViewer : MonoBehaviour
                     Debug.Log(response.displayText);
                 }
             }
-            else { OnNodeSelected(0); } // Move on to next node
+            else { OnNodeSelected(0);} // Move on to next node
 
 
         }
