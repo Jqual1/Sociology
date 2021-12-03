@@ -27,12 +27,14 @@ So? What are your thoughts?
 Address the singling out of female dress code in an assembly[[AdressIssue]]
 Create a stricter dress-code for students[[StrictCode]]
 
-:: AdressIssue
+:: AdressIssue[Character D]
 Interesting. That sounds like a good decision to me.
+...
 Next[[CulturalCompetency]]
 
-:: StrictCode
+:: StrictCode[Character D]
 I'll leave the execution in your hands!
+...
 Next[[CulturalCompetency]]
 
 :: UniformB[Character D]
@@ -41,12 +43,14 @@ I know you work closely with the parents and students, so I need you to find a s
 Allow uniform purchases through voucher system[[Vouchers]]
 Issue suspensions to students without uniforms[[Suspensions]]
 
-:: Vouchers
+:: Vouchers[Character D]
 I trust that this is the right decision
+...
 Next[[CulturalCompetency]]
 
-:: Suspensions
+:: Suspensions[Character D]
 See to it that it works
+...
 Next[[CulturalCompetency]]
 
 :: CulturalCompetency[Character E]
@@ -55,12 +59,14 @@ I've been reading up on some studies recently, and I think it could really help 
 Request Cultural Competency Training[[RequestTraining]]
 Stick with the originally planned schedule[[OriginalTraining]]
 
-:: RequestTraining[PreCutScene]
+:: RequestTraining[Character E]
 Great! I'll put in the request now.
+...
 Next[[CutSceneNeutral]]
 
-:: OriginalTraining[PreCutScene]
+:: OriginalTraining[Character E]
 Oh, really. I guess there's just no room, huh?
+...
 Next[[CutSceneNeutral]]
 
 :: CutSceneNeutral[END CutScene Chapter3]

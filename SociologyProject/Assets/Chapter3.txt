@@ -28,12 +28,14 @@ We wouldn't be able to hire that counselor with money from the bill. Should we g
 Allow the exception for the school[[AllowException]]
 Stick to the plan, send an SRO[[SRO]]
 
-:: AllowException
+:: AllowException[Character A]
 Yes ma'am, we will follow through with your plan. Take care.
+...
 Next[[PoliticalDiscussions]]
 
-:: SRO
+:: SRO[Character A]
 Yes ma'am, we will follow through with your plan. Take care.
+...
 Next[[PoliticalDiscussions]]
 
 :: PoliticalDiscussions[Character C]
@@ -44,14 +46,16 @@ Do you think this should require faculty involvement, or should this be somethin
 Get the faculty involved[[FacultyInvolved]]
 Leave it to the students[[LeavetoStudents]]
 
-:: FacultyInvolved[PreCutScene]
+:: FacultyInvolved[Character C]
 I always appreciate your advice. I'll take it into account.
 Have a good rest of your day.
+...
 Next[[CutSceneNeutral]]
 
-:: LeavetoStudents[PreCutScene]
+:: LeavetoStudents[Character C]
 I always appreciate your advice. I'll take it into account.
 Have a good rest of your day.
+...
 Next[[CutSceneNeutral]]
 
 :: CutSceneNeutral[END CutScene Chapter4]

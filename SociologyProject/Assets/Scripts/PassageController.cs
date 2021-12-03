@@ -15,6 +15,7 @@ public class PassageController : MonoBehaviour
     public string GetCurrentChunk()
     {
         return chunks[currentIndex];
+        
     }
 
     public bool IsEndOfPassagage()
@@ -25,6 +26,13 @@ public class PassageController : MonoBehaviour
     public void InitializePassage(Node node)
     {
         chunks = node.text.Split(new string[] { "\n" }, StringSplitOptions.None);
+        Debug.Log("******");
+        foreach(string t in chunks)
+        {
+            Debug.Log(t);
+        }
+        
+        Debug.Log("***");
         currentIndex = 0;
         onEnteredChunk(chunks[currentIndex]);
     }

@@ -26,27 +26,31 @@ I don't feel like it's something I can start myself. Is there anything you could
 Let's make this club![[MakeClub]]
 There's currently not room in the budget[[NoBudget]]
 
-:: MakeClub
+:: MakeClub[Character F]
 Thanks so much! I'll be sure to join.
+...
 Next[[SportsFunding]]
 
-:: NoBudget
+:: NoBudget[Character F]
 Oh, I see. Well thanks for trying.
+...
 Next[[SportsFunding]]
 
 :: SportsFunding[Character G]
 Parker, do you have a moment?
 Administration says that a portion of the recent big donation is going to some of our sports teams.
 Do you have any thoughts on where that money should go?
-Well the football team is the biggest team…[[FootballTeam]]
+Well the football team is the biggest team...[[FootballTeam]]
 Maybe we should fund multiple smaller teams.[[SmallerTeams]]
 
-:: FootballTeam[PreCutScene]
+:: FootballTeam[Character G]
 Thanks for your support! I'll pass your word on.
+...
 Next[[CutSceneNeutral]]
 
-:: SmallerTeams[PreCutScene]
+:: SmallerTeams[Character G]
 Sounds good! I'll pass your word on, and see what happens.
+...
 Next[[CutSceneNeutral]]
 
 :: CutSceneNeutral[END CutScene]
