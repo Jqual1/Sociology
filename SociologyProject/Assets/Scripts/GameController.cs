@@ -149,7 +149,6 @@ public class GameController : MonoBehaviour
     public void ChangeCapital(int[] amount)
     {
         // REMINDER { teachers, faculty, parents, students, community, Maya }
-        Debug.Log(amount[0]);
 		for( int i = 0; i < 6; i++ )
 		{
             capArr[i] += amount[i];
@@ -187,32 +186,134 @@ public class GameController : MonoBehaviour
         }
 
 	}
+    private int CheckChangeCap(int capChange, int i)
+	{
+        // Return ints
+        int product = capArr[i] + capChange;
+        if (capArr[i] <= 20)
+        {
+            if(product <= -20)
+			{
+                return 0;
+			}
+            if(product <= 0)
+			{
+                return 1;
+			}
+            if(product <= 20)
+			{
+                return 2;
+			}
+            if(product <= 40)
+			{
+                return 3;
+			}
+			else
+			{
+                return 4;
+			}
+        }
+        else if (capArr[i] <= 40)
+        {
+            if (product <= 0)
+            {
+                return 0;
+            }
+            if (product <= 20)
+            {
+                return 1;
+            }
+            if (product <= 40)
+            {
+                return 2;
+            }
+            if (product <= 60)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else if (capArr[i] <= 60)
+        {
+            if (product <= 20)
+            {
+                return 0;
+            }
+            if (product <= 40)
+            {
+                return 1;
+            }
+            if (product <= 60)
+            {
+                return 2;
+            }
+            if (product <= 80)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else if (capArr[i] <= 80)
+        {
+            if (product <= 40)
+            {
+                return 0;
+            }
+            if (product <= 60)
+            {
+                return 1;
+            }
+            if (product <= 80)
+            {
+                return 2;
+            }
+            if (product <= 100)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else
+        {
+            if (product <= 60)
+            {
+                return 0;
+            }
+            if (product <= 80)
+            {
+                return 1;
+            }
+            if (product <= 100)
+            {
+                return 2;
+            }
+            if (product <= 120)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+    }
     public void UpdateChangeCap(int[] capChange)
 	{
         Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
         Sprite[] emoChangeArr = new Sprite[] { doubleD, singleD, noChange, singleU, doubleU };
         for ( int i = 0; i < 5; i++ )
 		{
-            if( capChange[i] > 15)
-			{
-                capEmoArr[i].sprite = emoChangeArr[4];
-			}
-            else if (capChange[i] > 5)
-            {
-                capEmoArr[i].sprite = emoChangeArr[3];
-            }
-            else if (capChange[i] > -6)
-            {
-                capEmoArr[i].sprite = emoChangeArr[2];
-            }
-            else if (capChange[i] > -16)
-            {
-                capEmoArr[i].sprite = emoChangeArr[1];
-            }
-            else
-            {
-                capEmoArr[i].sprite = emoChangeArr[0];
-            }
+            int index = CheckChangeCap(capChange[i], i);
+            capEmoArr[i].sprite = emoChangeArr[index];
         }
 	}
     public void ToggleCapital()

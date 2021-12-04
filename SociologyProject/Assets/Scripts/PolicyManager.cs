@@ -63,19 +63,19 @@ public class PolicyManager : MonoBehaviour
 
     private int[,] policyCostN = new int[,] {
     // { teachers, faculty, parents, students, community, Maya}
-      { 5, -5, 10, 0, 5, 10 },   // Extended Bus Routes
-      { 10, -5, 15, 10, 10, 15 },   // Voucher System
-      { 15, -5, 15, 15, 5, 15 },   // FAFSA
+      { 5, -5, 10, -10, 5, 10 },   // Extended Bus Routes
+      { 10, -5, 5, 10, -5, 15 },   // Voucher System
+      { 15, 5, 15, 15, 0, 15 },   // FAFSA
       { -10, -10, -15, 10, -5, 10 },   // Career and Technical Education Program
-      { -10, -10, 5, 10, -5, 10 },   // Establish Magnet Schools
+      { 10, -10, 5, 10, -5, 10 },   // Establish Magnet Schools
       { -25, -25, -10, 10, -5, 15 },   // Federal Cultural Competency Training
-      { -10, -15, -10, 5, -10, 15 },   // Title IX Training
-      { 15, -10, 20, -5, 10, 10 },   // After School Program
-      { -20, -15, -10, -15, 10, -5 },   // School Resource Officer (SRO)
-      { 20, 10, -10, -20, 10, -20 },   // Dress Code
-      { -20, 15, -5, -25, 10, -20 },   // Zero Tolerance Disciplin
+      { -10, -15, 10, 5, -10, 15 },   // Title IX Training
+      { 10, -10, 20, -5, 10, 10 },   // After School Program
+      { -15, -10, -10, -15, 10, -5 },   // School Resource Officer (SRO)
+      { 20, 20, -10, -20, 0, -20 },   // Dress Code
+      { 5, 15, -5, -25, 10, -20 },   // Zero Tolerance Disciplin
       { -10, 0, 10, 10, -10, 10 },   // Critical Conversation Space
-      { 15, -5, 15, 10, 10, 15 }   // IQ testing
+      { 15, -5, -10, 10, 10, 15 }   // IQ testing
     };
 
     private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
