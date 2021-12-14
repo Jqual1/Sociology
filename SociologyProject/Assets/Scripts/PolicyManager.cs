@@ -85,6 +85,12 @@ public class PolicyManager : MonoBehaviour
     public void policyPReset()
 	{
         policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false };
+        foreach (GameObject policyButton in policyButtons)
+		{
+            ColorUtility.TryParseHtmlString("#737373", out Color color);
+            policyButton.GetComponent<Image>().color = color;
+            resetPickedThisRound();
+		}
     }
 
     public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }

@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
     // Capital
-    private int teachers, faculty, parents, students, community, Maya;
+    public int teachers, faculty, parents, students, community, Maya;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
     public Image teaCha, facCha, parCha, stuCha, comCha;
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public int progress;
     public GameObject mainMenu;
     public GameObject endScreen;
+    public GameObject dialogueScreen;
 
     public DialogueViewer dialogueViewer;
     public GameObject pauseMenu;
@@ -61,11 +62,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        capArr = new int[]{ teachers, faculty, parents, students, community, Maya };
-        for (int i = 0; i < 6; i++)
-		{
-            capArr[i] = 50;
-		}
+        ResetCapital();
         UpdateCapital();
         progress = 0;
         PolicyObject policyObject = new PolicyObject();
@@ -97,7 +94,10 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         //moneyGraphic.SetActive(true);
+        dialogueScreen.SetActive(true);
         mainMenu.SetActive(false);
+        capitalScreen.SetActive(true);
+        ResetCapital();
         // TODO: Add assertion
         //curChapterIndex = 0;
 
@@ -128,25 +128,35 @@ public class GameController : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
+        capitalScreen.SetActive(false);
         mainMenu.SetActive(true);
         //policyScreen.SetActive(false);
-        progress = 0;
-        parents = 50;
-        teachers = 50;
-        faculty = 50;
-        students = 50;
-        community = 50;
+
     }
 
     public void EndGame()
     {
         endScreen.SetActive(true);
         mainMenu.SetActive(false);
+        dialogueScreen.SetActive(false);
         //moneyGraphic.SetActive(false);
     }
+	public void ResetCapital()
+	{
+        progress = 0;
+        capArr = new int[] { teachers, faculty, parents, students, community, Maya };
+        for (int i = 0; i < 6; i++)
+        {
+            capArr[i] = 50;
+        }
+        capChangeBool = true;
+        ToggleCapitalChange();
+        UpdateCapital();
+        policyManager.policyPReset();
+	}
 
-    // New system for changing capital
-    public void ChangeCapital(int[] amount)
+	// New system for changing capital
+	public void ChangeCapital(int[] amount)
     {
         // REMINDER { teachers, faculty, parents, students, community, Maya }
 		for( int i = 0; i < 6; i++ )
@@ -330,16 +340,16 @@ public class GameController : MonoBehaviour
 
     public void ToggleCapitalChange()
 	{
-        Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
+        Image[] capEmoChaArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
         for (int i = 0; i < 5; i++)
 		{
             if(capChangeBool)
 			{
-                capEmoArr[i].transform.gameObject.SetActive(false);
+                capEmoChaArr[i].transform.gameObject.SetActive(false);
 			}
             else
             {
-                capEmoArr[i].transform.gameObject.SetActive(true);
+                capEmoChaArr[i].transform.gameObject.SetActive(true);
             }
         }
         capChangeBool = !capChangeBool;
