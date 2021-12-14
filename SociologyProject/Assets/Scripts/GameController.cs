@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     // This is acting as GameManager
     public static GameController Instance { get; private set; }
     // Capital
-    public int teachers, faculty, parents, students, community, Maya;
+    private int teachers, faculty, parents, students, community, Maya;
     public Image teaEmo, facEmo, parEmo, stuEmo, comEmo;
     public Sprite sadEmo, mehEmo, midEmo, okayEmo, happyEmo;
     public Image teaCha, facCha, parCha, stuCha, comCha;
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public int progress;
     public GameObject mainMenu;
     public GameObject endScreen;
+    public GameObject settingsScreen;
     public GameObject dialogueScreen;
 
     public DialogueViewer dialogueViewer;
@@ -42,8 +43,9 @@ public class GameController : MonoBehaviour
 
     // Sounds
     public AudioMixer mixer;
-    public GameObject volumeButton;
-    public GameObject volumeSlider;
+
+    public Toggle sec30, sec15, secNo;
+    private Toggle currSec;
 
     private void Awake()
     {
@@ -62,6 +64,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currSec = sec30;
         ResetCapital();
         UpdateCapital();
         progress = 0;
@@ -73,6 +76,7 @@ public class GameController : MonoBehaviour
         mainMenu.SetActive(true);
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
+        settingsScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -128,7 +132,9 @@ public class GameController : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
+        settingsScreen.SetActive(false);
         capitalScreen.SetActive(false);
+        dialogueScreen.SetActive(false);
         mainMenu.SetActive(true);
         //policyScreen.SetActive(false);
 
@@ -138,9 +144,14 @@ public class GameController : MonoBehaviour
     {
         endScreen.SetActive(true);
         mainMenu.SetActive(false);
-        dialogueScreen.SetActive(false);
         //moneyGraphic.SetActive(false);
     }
+    
+    public void Settings()
+	{
+        settingsScreen.SetActive(true);
+        mainMenu.SetActive(false);
+	}
 	public void ResetCapital()
 	{
         progress = 0;
@@ -422,7 +433,16 @@ public class GameController : MonoBehaviour
         }
         activeSchoolPolicies.Add(policy);
     }
-
+    
+    public void Toggle(Toggle s)
+	{
+        ResetToggles(s);
+	}
+    public void ResetToggles(Toggle s)
+	{
+        currSec.isOn = false;
+        currSec = s;
+	}
 
     public IEnumerator LoadYourAsyncScene(string scene)
     {        
@@ -434,22 +454,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Volume Controls
-    // Activates the volume slider by clicking the icon
-    public void volumeOnClick()
-    {
-        if (volumeSlider.activeSelf == true)
-        {
-            volumeSlider.SetActive(false);
-        }
-        else
-        {
-            volumeSlider.SetActive(true);
-        }
-    }
     // Sets the volume using the slider
     public void setVolume(float sliderValue)
     {
         mixer.SetFloat("masterVol", (Mathf.Log10(sliderValue) * 20));
+    }
+    public void setMusic(float sliderValue)
+    {
+        mixer.SetFloat("musicVol", (Mathf.Log10(sliderValue) * 20));
+    }
+    public void setOther(float sliderValue)
+    {
+        mixer.SetFloat("otherVol", (Mathf.Log10(sliderValue) * 20));
     }
 }
