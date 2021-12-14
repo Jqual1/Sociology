@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public GameObject endScreen;
     public GameObject settingsScreen;
     public GameObject dialogueScreen;
+    public GameObject policyScreen;
 
     public DialogueViewer dialogueViewer;
     public GameObject pauseMenu;
@@ -77,6 +78,7 @@ public class GameController : MonoBehaviour
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        policyScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -101,6 +103,7 @@ public class GameController : MonoBehaviour
         dialogueScreen.SetActive(true);
         mainMenu.SetActive(false);
         capitalScreen.SetActive(true);
+        policyScreen.SetActive(true);
         ResetCapital();
         // TODO: Add assertion
         //curChapterIndex = 0;
@@ -136,8 +139,7 @@ public class GameController : MonoBehaviour
         capitalScreen.SetActive(false);
         dialogueScreen.SetActive(false);
         mainMenu.SetActive(true);
-        //policyScreen.SetActive(false);
-
+        policyScreen.SetActive(false);
     }
 
     public void EndGame()
