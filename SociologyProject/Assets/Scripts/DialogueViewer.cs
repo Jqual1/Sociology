@@ -17,6 +17,7 @@ public class DialogueViewer : MonoBehaviour
     public CutSceneController cutSceneController;
     public DialogueBoxController dialogueBoxController;
     DialogueController dialogueController;
+    public Countdown countdown;
 
     public int curChapterIndex;
     public TextAsset[] chapters;
@@ -30,6 +31,7 @@ public class DialogueViewer : MonoBehaviour
     public GameObject characterG;
     public GameObject characterH;
     public GameObject characterI;
+    public GameObject characters;
     public GameObject intro;
 
     public GameObject postIntro;
@@ -50,10 +52,6 @@ public class DialogueViewer : MonoBehaviour
 
         passageController = GetComponent<PassageController>();
         passageController.onEnteredChunk += OnChunkEntered;
-
-        //dialogueController.InitializeDialogue();
-        
-
     }
 
     // Update is called once per frame
@@ -95,14 +93,12 @@ public class DialogueViewer : MonoBehaviour
         {
             ClearPosts();
             Debug.Log("Chapter Index: " + curChapterIndex);
-            //dialogueController.GetCurrentDialogue().GetNode()
             if (GameController.Instance.progress <3)
             {
                 Response newResponse = new Response();
                 newResponse.displayText = "Next";
                 newResponse.destinationNode = "CutScenePoor";
                 node.responses[0] = newResponse;
-                // curChapterIndex
                 if (curChapterIndex == 0)
                 {
                     post1PN.SetActive(true);
@@ -172,7 +168,6 @@ public class DialogueViewer : MonoBehaviour
             dialogueBoxController.HideDialogue();
 
             policyController.OpenPolicy();
-            //dialogueBoxController.policyButton.GetComponent<Button>().interactable = true;
         }
         if (node.tags.Contains("Character"))
         {
@@ -185,8 +180,6 @@ public class DialogueViewer : MonoBehaviour
             Debug.Log("Intro");
         }
         passageController.InitializePassage(node);
-        //dialogueBoxController.policyButton.GetComponent<Button>().interactable = false; //
-
         // Actions
         Policy policy = GameController.Instance.FindPolicy(node.title);
         if (policy != null)
@@ -211,7 +204,6 @@ public class DialogueViewer : MonoBehaviour
         {
             cutSceneController.CloseCutScene();
             Debug.Log("Entering next chapter");
-            //GameController.Instance.NextChapter();
             NextChapter();
         }
     }
@@ -244,6 +236,7 @@ public class DialogueViewer : MonoBehaviour
 
             if (dialogueController.GetCurrentNode().responses.Count > 1)
             {
+                countdown.Begin();
                 foreach(Response r in dialogueController.GetCurrentNode().responses)
                 {
                     Debug.Log(r.displayText);
@@ -265,7 +258,6 @@ public class DialogueViewer : MonoBehaviour
 
     public void ShowChoices(List<Response> responses)
     {
-        //HideAllChoices();
         dialogueBoxController.dialogueSide.SetActive(false);
         Assert.IsTrue(choices.Length >= responses.Count);
         for (int i = 0; i < responses.Count; i++)
@@ -273,16 +265,7 @@ public class DialogueViewer : MonoBehaviour
             // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
             var index = responses.Count - (i + 1);
             Debug.Log("Index: " + index);
-            //choices[i].GetComponent<Button>().onClick.AddListener(delegate { OnNodeSelected(index); });
             choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = responses[responses.Count - (i + 1)].displayText;
-
-
-            /*
-            // TODO: Add not null assertion
-            if (!GameController.Instance.IsAvailable(responses[responses.Count - (i + 1)].destinationNode))
-            {
-                choices[i].GetComponent<Button>().interactable = false;
-            }*/
             string policyName = responses[responses.Count - (i + 1)].destinationNode;
             Policy policy = GameController.Instance.FindPolicy(policyName);
 
@@ -299,11 +282,6 @@ public class DialogueViewer : MonoBehaviour
             else
             {
                 choices[i].GetComponent<Button>().interactable = true;
-                /*if (policy.feedback != "")
-                {
-                    feedbackButtons[i].SetActive(true);
-                    feedbackButtons[i].GetComponent<Feedback>().text = policy.feedback;
-                }*/
             }
             choices[i].SetActive(true);
 
@@ -336,6 +314,7 @@ public class DialogueViewer : MonoBehaviour
         characterH.SetActive(false);
         characterI.SetActive(false);
         intro.SetActive(false);
+        characters.GetComponent<Animator>().Play("CharacterHide");
     }
 
     public void OpenCharacters(Node node)
@@ -349,6 +328,7 @@ public class DialogueViewer : MonoBehaviour
         if (node.tags.Contains("G")) { characterG.SetActive(true); }
         if (node.tags.Contains("H")) { characterH.SetActive(true); }
         if (node.tags.Contains("I")) { characterI.SetActive(true); }
+        characters.GetComponent<Animator>().Play("CharacterShow");
     }
 
     public void ClearPosts()

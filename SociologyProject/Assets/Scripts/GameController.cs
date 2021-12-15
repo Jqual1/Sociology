@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour
     public int progress;
     public GameObject mainMenu;
     public GameObject endScreen;
+    public GameObject settingsScreen;
+    public GameObject dialogueScreen;
+    public GameObject policyScreen;
 
     public DialogueViewer dialogueViewer;
     public GameObject pauseMenu;
@@ -41,8 +44,9 @@ public class GameController : MonoBehaviour
 
     // Sounds
     public AudioMixer mixer;
-    public GameObject volumeButton;
-    public GameObject volumeSlider;
+
+    public Toggle sec30, sec15, secNo;
+    private Toggle currSec;
 
     private void Awake()
     {
@@ -61,11 +65,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        capArr = new int[]{ teachers, faculty, parents, students, community, Maya };
-        for (int i = 0; i < 6; i++)
-		{
-            capArr[i] = 50;
-		}
+        currSec = sec30;
+        ResetCapital();
         UpdateCapital();
         progress = 0;
         PolicyObject policyObject = new PolicyObject();
@@ -76,6 +77,8 @@ public class GameController : MonoBehaviour
         mainMenu.SetActive(true);
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
+        settingsScreen.SetActive(false);
+        policyScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -97,7 +100,11 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         //moneyGraphic.SetActive(true);
+        dialogueScreen.SetActive(true);
         mainMenu.SetActive(false);
+        capitalScreen.SetActive(true);
+        policyScreen.SetActive(true);
+        ResetCapital();
         // TODO: Add assertion
         //curChapterIndex = 0;
 
@@ -128,14 +135,11 @@ public class GameController : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
+        settingsScreen.SetActive(false);
+        capitalScreen.SetActive(false);
+        dialogueScreen.SetActive(false);
         mainMenu.SetActive(true);
-        //policyScreen.SetActive(false);
-        progress = 0;
-        parents = 50;
-        teachers = 50;
-        faculty = 50;
-        students = 50;
-        community = 50;
+        policyScreen.SetActive(false);
     }
 
     public void EndGame()
@@ -144,12 +148,30 @@ public class GameController : MonoBehaviour
         mainMenu.SetActive(false);
         //moneyGraphic.SetActive(false);
     }
+    
+    public void Settings()
+	{
+        settingsScreen.SetActive(true);
+        mainMenu.SetActive(false);
+	}
+	public void ResetCapital()
+	{
+        progress = 0;
+        capArr = new int[] { teachers, faculty, parents, students, community, Maya };
+        for (int i = 0; i < 6; i++)
+        {
+            capArr[i] = 50;
+        }
+        capChangeBool = true;
+        ToggleCapitalChange();
+        UpdateCapital();
+        policyManager.policyPReset();
+	}
 
-    // New system for changing capital
-    public void ChangeCapital(int[] amount)
+	// New system for changing capital
+	public void ChangeCapital(int[] amount)
     {
         // REMINDER { teachers, faculty, parents, students, community, Maya }
-        Debug.Log(amount[0]);
 		for( int i = 0; i < 6; i++ )
 		{
             capArr[i] += amount[i];
@@ -187,32 +209,134 @@ public class GameController : MonoBehaviour
         }
 
 	}
+    private int CheckChangeCap(int capChange, int i)
+	{
+        // Return ints
+        int product = capArr[i] + capChange;
+        if (capArr[i] <= 20)
+        {
+            if(product <= -20)
+			{
+                return 0;
+			}
+            if(product <= 0)
+			{
+                return 1;
+			}
+            if(product <= 20)
+			{
+                return 2;
+			}
+            if(product <= 40)
+			{
+                return 3;
+			}
+			else
+			{
+                return 4;
+			}
+        }
+        else if (capArr[i] <= 40)
+        {
+            if (product <= 0)
+            {
+                return 0;
+            }
+            if (product <= 20)
+            {
+                return 1;
+            }
+            if (product <= 40)
+            {
+                return 2;
+            }
+            if (product <= 60)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else if (capArr[i] <= 60)
+        {
+            if (product <= 20)
+            {
+                return 0;
+            }
+            if (product <= 40)
+            {
+                return 1;
+            }
+            if (product <= 60)
+            {
+                return 2;
+            }
+            if (product <= 80)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else if (capArr[i] <= 80)
+        {
+            if (product <= 40)
+            {
+                return 0;
+            }
+            if (product <= 60)
+            {
+                return 1;
+            }
+            if (product <= 80)
+            {
+                return 2;
+            }
+            if (product <= 100)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+        else
+        {
+            if (product <= 60)
+            {
+                return 0;
+            }
+            if (product <= 80)
+            {
+                return 1;
+            }
+            if (product <= 100)
+            {
+                return 2;
+            }
+            if (product <= 120)
+            {
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+        }
+    }
     public void UpdateChangeCap(int[] capChange)
 	{
         Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
         Sprite[] emoChangeArr = new Sprite[] { doubleD, singleD, noChange, singleU, doubleU };
         for ( int i = 0; i < 5; i++ )
 		{
-            if( capChange[i] > 15)
-			{
-                capEmoArr[i].sprite = emoChangeArr[4];
-			}
-            else if (capChange[i] > 5)
-            {
-                capEmoArr[i].sprite = emoChangeArr[3];
-            }
-            else if (capChange[i] > -6)
-            {
-                capEmoArr[i].sprite = emoChangeArr[2];
-            }
-            else if (capChange[i] > -16)
-            {
-                capEmoArr[i].sprite = emoChangeArr[1];
-            }
-            else
-            {
-                capEmoArr[i].sprite = emoChangeArr[0];
-            }
+            int index = CheckChangeCap(capChange[i], i);
+            capEmoArr[i].sprite = emoChangeArr[index];
         }
 	}
     public void ToggleCapital()
@@ -229,16 +353,16 @@ public class GameController : MonoBehaviour
 
     public void ToggleCapitalChange()
 	{
-        Image[] capEmoArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
+        Image[] capEmoChaArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
         for (int i = 0; i < 5; i++)
 		{
             if(capChangeBool)
 			{
-                capEmoArr[i].transform.gameObject.SetActive(false);
+                capEmoChaArr[i].transform.gameObject.SetActive(false);
 			}
             else
             {
-                capEmoArr[i].transform.gameObject.SetActive(true);
+                capEmoChaArr[i].transform.gameObject.SetActive(true);
             }
         }
         capChangeBool = !capChangeBool;
@@ -311,7 +435,16 @@ public class GameController : MonoBehaviour
         }
         activeSchoolPolicies.Add(policy);
     }
-
+    
+    public void Toggle(Toggle s)
+	{
+        ResetToggles(s);
+	}
+    public void ResetToggles(Toggle s)
+	{
+        currSec.isOn = false;
+        currSec = s;
+	}
 
     public IEnumerator LoadYourAsyncScene(string scene)
     {        
@@ -323,22 +456,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Volume Controls
-    // Activates the volume slider by clicking the icon
-    public void volumeOnClick()
-    {
-        if (volumeSlider.activeSelf == true)
-        {
-            volumeSlider.SetActive(false);
-        }
-        else
-        {
-            volumeSlider.SetActive(true);
-        }
-    }
     // Sets the volume using the slider
     public void setVolume(float sliderValue)
     {
         mixer.SetFloat("masterVol", (Mathf.Log10(sliderValue) * 20));
+    }
+    public void setMusic(float sliderValue)
+    {
+        mixer.SetFloat("musicVol", (Mathf.Log10(sliderValue) * 20));
+    }
+    public void setOther(float sliderValue)
+    {
+        mixer.SetFloat("otherVol", (Mathf.Log10(sliderValue) * 20));
     }
 }

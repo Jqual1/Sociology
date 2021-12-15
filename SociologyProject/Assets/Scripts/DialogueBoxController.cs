@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueBoxController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DialogueBoxController : MonoBehaviour
     public GameObject dialogueBox;
     public GameObject textBox;
     public GameObject policyButton;
+    public GameObject nextButton;
     private AudioSource nextSound;
     public DialogueViewer dialogueViewer;
 
@@ -71,13 +73,17 @@ public class DialogueBoxController : MonoBehaviour
     {
         if (typingComplete)
         {
+            textBox.GetComponent<Button>().interactable = true;
             dialogueViewer.Next();
+            nextButton.SetActive(false);
         }
         else
         {
+            textBox.GetComponent<Button>().interactable = false;
             StopCoroutine(dialogueCo);
             textBox.GetComponent<TextMeshProUGUI>().text = fullMessage;
             typingComplete = true;
+            nextButton.SetActive(true);
         }
         PlayNextSound();
     }
@@ -85,6 +91,8 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator typeText(string text)
     {
         typingComplete = false;
+        textBox.GetComponent<Button>().interactable = true;
+        nextButton.SetActive(false);
         textBox.GetComponent<TextMeshProUGUI>().text = "";
         foreach (char c in text.ToCharArray())
         {
@@ -97,6 +105,8 @@ public class DialogueBoxController : MonoBehaviour
             yield return new WaitForSeconds(.03f);
         }
         typingComplete = true;
+        textBox.GetComponent<Button>().interactable = false;
+        nextButton.SetActive(true);
     }
 
     public void PlayNextSound()
