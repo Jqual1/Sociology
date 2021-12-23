@@ -44,6 +44,8 @@ public class DialogueViewer : MonoBehaviour
 
     public GameObject[] feedbackButtons;
 
+    private bool policy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -217,6 +219,11 @@ public class DialogueViewer : MonoBehaviour
             cutSceneController.DisplayText(chunk);
 
             Debug.Log("Entered chunk with text: " + chunk);
+        } 
+        else if ( policy ) 
+        {
+            dialogueBoxController.HideDialogue();
+            policy = false;
         }
         else
         {
@@ -254,7 +261,10 @@ public class DialogueViewer : MonoBehaviour
         }
     }
 
-    
+    public void HideDialogue()
+	{
+        policy = true;
+    }
 
     public void ShowChoices(List<Response> responses)
     {
