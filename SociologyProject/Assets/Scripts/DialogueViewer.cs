@@ -68,6 +68,10 @@ public class DialogueViewer : MonoBehaviour
         curChapterIndex = 0;
         dialogueController.InitializeDialogue(chapters[curChapterIndex]);
         Debug.Log("Initialized dialogue");
+        foreach( GameObject background in backgrounds)
+		{
+            background.SetActive(false);
+		}
         backgrounds[curChapterIndex].SetActive(true);
     }
 

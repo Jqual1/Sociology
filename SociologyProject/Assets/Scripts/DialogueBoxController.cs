@@ -47,6 +47,7 @@ public class DialogueBoxController : MonoBehaviour
 
     public void CloseBox()
     {
+        textBox.GetComponent<Button>().interactable = false;
         dialogueAnimator.SetBool("isOpen", false);
     }
 
