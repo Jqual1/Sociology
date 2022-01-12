@@ -110,6 +110,8 @@ public class GameController : MonoBehaviour
 
         //chapters[curChapterIndex].SetActive(true);
         dialogueViewer.InitializeDialogue();
+        dialogueViewer.ClearCharacters();
+        dialogueViewer.intro.SetActive(true);
 
         List<Policy> activeSchoolPolicies = new List<Policy>();
         progress = 0;
@@ -120,19 +122,23 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
+        Time.timeScale = 0;
         gamePaused = true;
         pauseMenu.SetActive(true);
     }
 
     public void Resume()
     {
+        Time.timeScale = 1;
         gamePaused = false;
         pauseMenu.SetActive(false);
     }
 
     public void MainMenu()
     {
+        Resume();
         gamePaused = false;
+        dialogueViewer.countdown.reset();
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
         settingsScreen.SetActive(false);

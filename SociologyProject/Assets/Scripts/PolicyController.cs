@@ -27,6 +27,7 @@ public class PolicyController : MonoBehaviour
         policyAnimator.SetBool("isOpen", true);
         staticElements.SetActive(true);
         GameController.Instance.ToggleCapitalChange();
+        dialogueViewer.HideDialogue();
     }
 
     public void ClosePolicy()
