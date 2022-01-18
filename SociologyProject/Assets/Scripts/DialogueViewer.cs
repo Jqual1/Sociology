@@ -94,7 +94,8 @@ public class DialogueViewer : MonoBehaviour
     }
 
     public void OnNodeEntered(Node node)
-    {                
+    {
+
         if (node.tags.Contains("PreCutScene"))
         {
             ClearPosts();
@@ -190,6 +191,7 @@ public class DialogueViewer : MonoBehaviour
         Policy policy = GameController.Instance.FindPolicy(node.title);
         if (policy != null)
         {
+            
             Debug.Log("Activating policy: " + policy.name);
             GameController.Instance.ActivatePolicy(policy);
         }
@@ -244,7 +246,6 @@ public class DialogueViewer : MonoBehaviour
         }
         else
         {
-
             if (dialogueController.GetCurrentNode().responses.Count > 1)
             {
                 countdown.Begin();
@@ -280,16 +281,23 @@ public class DialogueViewer : MonoBehaviour
             var index = responses.Count - (i + 1);
             Debug.Log("Index: " + index);
             choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = responses[responses.Count - (i + 1)].displayText;
+            Debug.Log(responses[responses.Count - (i + 1)].displayText);
             string policyName = responses[responses.Count - (i + 1)].destinationNode;
             Policy policy = GameController.Instance.FindPolicy(policyName);
-
+            Debug.Log("HERE");
+            Debug.Log(policyName);
             if (!GameController.Instance.IsAvailable(policyName))
             {
+                Debug.Log("Does Not Work");
                 choices[i].GetComponent<Button>().interactable = false;
+                feedbackButtons[i].GetComponent<Button>().interactable = false;
                 if (policy.feedback != "")
                 {
                     feedbackButtons[i].SetActive(true);
                     feedbackButtons[i].GetComponent<Feedback>().text = policy.feedback;
+                    Debug.Log(policy.feedback);
+                    Debug.Log(feedbackButtons[i]);
+                    Debug.Log(i);
                 }
                 
             }

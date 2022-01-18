@@ -1,6 +1,6 @@
 title,cost,prerequisite,progress,capital
 PBS,0,none,2,5 5 0 10 0 10
-STEM,10,none,0,5 0 10 10 5 10
+STEM,0,Career and Technical Education Program,0,5 0 10 10 5 10,The Career and Technical Education Program has not been purchased
 LowerGTRequirement,0,none,2,-10 5 -5 10 -5 5
 ChangeGTSelection,1,none,-1,-5 0 -10 5 0 10
 Johnson,0,none,-1,5 5 10 15 5 -10

@@ -11,8 +11,8 @@ Chapter1
 
 :: Intro[START]
 Welcome to itsmaya, an exploration into the variety of decisions that will affect the life of Maya, a black girl growing up in the public school system.
-You will have the opportunity to allocate money at a federal level. These policies will affect students all over the country.
-You will also have the ability to step into the shoes of individuals whose daily decisions have a personal affect on students of color.
+You will have the opportunity to pick policies that are dependent on and will affect the support of several groups, including Maya. 
+Your goal is to give Maya the best support possible while maintaing relationships with your supporting groups.
 Do what you feel is right, and try to make the best of the system that's in place. Good luck!
 Next[[Policy]]
 
@@ -90,17 +90,18 @@ Next[[CutScenePoor]]
 :: ContinueUniforms[PreCutScene, Character B]
 Understood. I will write a short blurb in the newsletter addressing this.
 ...
-Next[[CutScenePoor]]
+Next[[CutSceneNeutral]]
 
 
-:: CutScenePoor[END CutScene Chapter2]
+:: CutScenePoor[END CutScene]
 im so mad. mrs yellnitz suspended me today
 even though i didnt do anything wrong.
 and besides rachael was also talking
 and she didnt even get in trouble
 its not fair.
 
-:: CutSceneNeutral[END CutScene Chapter2]
+
+:: CutSceneNeutral[END CutScene]
 hey Inter-Gram! its maya.
 Jamie let me make an account on his phone
 but nobody tell my mom!
@@ -112,9 +113,7 @@ science was a lot of fun though
 we even got to hatch butterflies.
 #gross #butalsocool
 
-:: CutSceneGood[END CutScene Chapter2]
+:: CutSceneGood[END CutScene]
 chelsea and i got into the gifted and talented class!
 i saw all the cool projects the class before us did
 i want to do the one with the paintings of coins.
-
-

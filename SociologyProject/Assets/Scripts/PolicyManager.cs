@@ -78,7 +78,7 @@ public class PolicyManager : MonoBehaviour
       { 15, -5, -10, 10, 10, 15 }   // IQ testing
     };
 
-    private int[] policyBenefit = new int[] { 5, 4, 2, 2, 2, 2, 3, 2, 1};
+    private int[] policyBenefit = new int[] { 1, 1, 2, 2, 2, 3, 2, 2, -1}; //Need to reavaluate these and double check them with progress requirements
 
     public bool[] policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false};
 
