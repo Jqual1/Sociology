@@ -48,8 +48,6 @@ public class GameController : MonoBehaviour
     // Sounds
     public AudioMixer mixer;
 
-    public Toggle sec30, sec15, secNo;
-    private Toggle currSec;
 
     private int sourcesCount;
 
@@ -70,7 +68,6 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currSec = sec30;
         ResetCapital();
         UpdateCapital();
         progress = 0;
@@ -125,6 +122,9 @@ public class GameController : MonoBehaviour
 
         // isPlaying = true;
         // TODO: Reset purchased policies
+        dialogueViewer.HideAllChoices();
+        dialogueViewer.dialogueBoxController.dialogueSide.SetActive(true);
+        dialogueViewer.countdown.reset();
     }
 
     public void Pause()
@@ -143,9 +143,13 @@ public class GameController : MonoBehaviour
 
     public void MainMenu()
     {
+        foreach (GameObject background in dialogueViewer.backgrounds)
+        {
+            background.SetActive(false);
+        }
+        dialogueViewer.ClearCharacters();
         Resume();
         gamePaused = false;
-        dialogueViewer.countdown.reset();
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
         settingsScreen.SetActive(false);
@@ -460,16 +464,6 @@ public class GameController : MonoBehaviour
         activeSchoolPolicies.Add(policy);
     }
     
-    public void Toggle(Toggle s)
-	{
-        ResetToggles(s);
-	}
-    public void ResetToggles(Toggle s)
-	{
-        currSec.isOn = false;
-        currSec = s;
-	}
-
     public IEnumerator LoadYourAsyncScene(string scene)
     {        
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
