@@ -26,13 +26,13 @@ public class PassageController : MonoBehaviour
     public void InitializePassage(Node node)
     {
         chunks = node.text.Split(new string[] { "\n" }, StringSplitOptions.None);
-        Debug.Log("******");
-        foreach(string t in chunks)
-        {
-            Debug.Log(t);
-        }
+        //Debug.Log("******");
+        //foreach(string t in chunks)
+        //{
+        //    Debug.Log(t);
+        //}
         
-        Debug.Log("***");
+        //Debug.Log("***");
         currentIndex = 0;
         onEnteredChunk(chunks[currentIndex]);
     }

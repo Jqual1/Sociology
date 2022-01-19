@@ -33,7 +33,7 @@ public class CutSceneController : MonoBehaviour
     public void DisplayText(string text)
     {
         OpenCutScene();
-        Debug.Log("Showing text: " + text);
+        //Debug.Log("Showing text: " + text);
         textBox.GetComponent<TextMeshProUGUI>().text = text;
     }
 }

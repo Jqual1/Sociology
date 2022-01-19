@@ -28,6 +28,7 @@ public class DialogueController : MonoBehaviour
 
     public void InitializeDialogue(TextAsset twineText)
     {
+        
         if (macLineEndings) { delimeter = "\n"; }
         curDialogue = new Dialogue(twineText, delimeter);
         curNode = curDialogue.GetStartNode();
@@ -41,8 +42,29 @@ public class DialogueController : MonoBehaviour
 
     public void ChooseResponse(int responseIndex)
     {
+        Node nextNode;
         string nextNodeID = curNode.responses[responseIndex].destinationNode;
-        Node nextNode = curDialogue.GetNode(nextNodeID);
+        if (nextNodeID.ToLower().Contains("cutscene"))
+        {
+            int progress = GameController.Instance.progress;
+            if (progress < 5)
+            {
+                 nextNode = curDialogue.GetNode("CutScenePoor");
+            }
+            else if (progress < 7)
+            {
+                 nextNode = curDialogue.GetNode("CutSceneNeutral");
+            }
+            else
+            {
+                 nextNode = curDialogue.GetNode("CutSceneGood");
+            }
+        }
+        else
+        {
+             nextNode = curDialogue.GetNode(nextNodeID);
+            
+        }
         curNode = nextNode;
         onEnteredNode(nextNode);
     }

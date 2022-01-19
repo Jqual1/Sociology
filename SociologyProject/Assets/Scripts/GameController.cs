@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
     public GameObject mainMenu;
     public GameObject endScreen;
     public GameObject settingsScreen;
+    public GameObject sourcesScreen;
+    
     public GameObject dialogueScreen;
     public GameObject policyScreen;
 
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour
     public List<Policy> activeSchoolPolicies = new List<Policy>();
 
     public PolicyManager policyManager;
+    public SourcesScript sourcesScript;
 
     public List<Policy> schoolPolicies = new List<Policy>();
     [SerializeField] TextAsset policies;
@@ -47,6 +50,8 @@ public class GameController : MonoBehaviour
 
     public Toggle sec30, sec15, secNo;
     private Toggle currSec;
+
+    private int sourcesCount;
 
     private void Awake()
     {
@@ -78,7 +83,9 @@ public class GameController : MonoBehaviour
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        sourcesScreen.SetActive(false);
         policyScreen.SetActive(false);
+        sourcesCount = 0;
     }
 
     // Update is called once per frame
@@ -142,6 +149,8 @@ public class GameController : MonoBehaviour
         pauseMenu.SetActive(false);
         endScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        sourcesScreen.SetActive(false);
+        sourcesCount = 0;
         capitalScreen.SetActive(false);
         dialogueScreen.SetActive(false);
         mainMenu.SetActive(true);
@@ -160,6 +169,13 @@ public class GameController : MonoBehaviour
         settingsScreen.SetActive(true);
         mainMenu.SetActive(false);
 	}
+
+    public void Sources()
+    {
+        sourcesScreen.SetActive(true);
+        sourcesNext();
+        mainMenu.SetActive(false);
+    }
 	public void ResetCapital()
 	{
         progress = 0;
@@ -376,6 +392,7 @@ public class GameController : MonoBehaviour
 
 	public void ChangeProgress(int[] amount)
     {
+        Debug.Log(amount[0]);
         progress += amount[0];
     }
 
@@ -436,6 +453,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
+                Debug.Log("VALUE " + action.Value);
                 ChangeProgress(action.Value);
             }
         }
@@ -474,5 +492,16 @@ public class GameController : MonoBehaviour
     public void setOther(float sliderValue)
     {
         mixer.SetFloat("otherVol", (Mathf.Log10(sliderValue) * 20));
+    }
+
+
+    public void sourcesNext()
+    {
+        
+        if (sourcesCount != sourcesScript.getSourceLength())
+        {
+            sourcesScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = sourcesScript.getSource(sourcesCount);
+            sourcesCount += 1;
+        }
     }
 }
