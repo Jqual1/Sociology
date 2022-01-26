@@ -27,7 +27,7 @@ We're going to need some decisions from you, Mr. Johnson.
 We received many complaints from parents about the clothes some of the girls at this school are wearing.
 It is not appropriate for a school setting, and I hope we see some stricter enforcement of the rules.
 So? What are your thoughts?
-Address the singling out of female dress code in an assembly[[AdressIssue]]
+Address the singling out of females in an assembly[[AdressIssue]]
 Create a stricter dress-code for students[[StrictCode]]
 
 :: AdressIssue[Character D]
