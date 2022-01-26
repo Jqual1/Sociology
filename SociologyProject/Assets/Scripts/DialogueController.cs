@@ -20,6 +20,7 @@ public class DialogueController : MonoBehaviour
 
     public delegate void NodeEnteredHandler(Node node);
     public event NodeEnteredHandler onEnteredNode;
+    private int chapter = 1;
 
     public Node GetCurrentNode()
     {
@@ -46,12 +47,13 @@ public class DialogueController : MonoBehaviour
         string nextNodeID = curNode.responses[responseIndex].destinationNode;
         if (nextNodeID.ToLower().Contains("cutscene"))
         {
+            chapter += 1;
             int progress = GameController.Instance.progress;
-            if (progress < 5)
+            if (progress < (5+ (chapter-1)*3))
             {
                  nextNode = curDialogue.GetNode("CutScenePoor");
             }
-            else if (progress < 7)
+            else if (progress < (7 + (chapter - 1) * 3))
             {
                  nextNode = curDialogue.GetNode("CutSceneNeutral");
             }
