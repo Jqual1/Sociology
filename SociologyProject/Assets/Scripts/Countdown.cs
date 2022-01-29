@@ -15,9 +15,11 @@ public class Countdown : MonoBehaviour
     {
         if (!isCountingDown && duration != -1)
         {
+            CountdownBox.GetComponentInChildren<TextMeshProUGUI>().text = "Choose: " + duration + "s";
             CountdownBox.SetActive(true);
             Debug.Log("Time Start");
             isCountingDown = true;
+            r = false;
             timeRemaining = duration;
             Invoke("_tick", 1f);
         }

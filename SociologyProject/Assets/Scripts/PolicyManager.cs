@@ -21,6 +21,7 @@ public class PolicyManager : MonoBehaviour
 
     private int openPolicy;
     public GameObject[] policyButtons;
+    public GameObject purchaseButton;
 
     private bool policyPurchasedThisRound = false;
 
@@ -87,10 +88,11 @@ public class PolicyManager : MonoBehaviour
         policyPurchased = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false };
         foreach (GameObject policyButton in policyButtons)
 		{
-            ColorUtility.TryParseHtmlString("#737373", out Color color);
-            policyButton.GetComponent<Image>().color = color;
+            //ColorUtility.TryParseHtmlString("#737373", out Color color);
+            policyButton.GetComponent<Image>().color = Color.white;
             resetPickedThisRound();
 		}
+        purchaseButton.SetActive(false);
     }
 
     public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }
@@ -118,7 +120,8 @@ public class PolicyManager : MonoBehaviour
             GameController.Instance.ChangeCapital(GetRow(policyCostN, openPolicy));
             GameController.Instance.ChangeProgress(new int[] { policyBenefit[openPolicy] });
             policyPurchased[openPolicy] = true;
-            policyButtons[openPolicy].GetComponent<Image>().color = Color.white;
+            ColorUtility.TryParseHtmlString("#737373", out Color color);
+            policyButtons[openPolicy].GetComponent<Image>().color = color;
             policyPurchasedThisRound = true;
         }
     }
@@ -132,6 +135,7 @@ public class PolicyManager : MonoBehaviour
     {
         StartDialogue(getPolicyDescription(policyNumber));
         GameController.Instance.UpdateChangeCap(GetRow(policyCostN, policyNumber));
+        purchaseButton.SetActive(true);
     }
 
     public void StartDialogue(string text)
