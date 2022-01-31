@@ -43,6 +43,7 @@ public class DialogueViewer : MonoBehaviour
     public GameObject post4G;
 
     public GameObject[] feedbackButtons;
+    public GameObject nextButton;
 
     private bool policy = false;
 
@@ -64,7 +65,12 @@ public class DialogueViewer : MonoBehaviour
 
     public void InitializeDialogue()
     {
-        //
+        dialogueController = GetComponent<DialogueController>();
+        dialogueController.onEnteredNode += OnNodeEntered;
+
+        passageController = GetComponent<PassageController>();
+        passageController.onEnteredChunk += OnChunkEntered;
+
         curChapterIndex = 0;
         dialogueController.InitializeDialogue(chapters[curChapterIndex]);
         Debug.Log("Initialized dialogue");
@@ -202,10 +208,17 @@ public class DialogueViewer : MonoBehaviour
         ClearCharacters();
         HideAllChoices();
         dialogueBoxController.dialogueSide.SetActive(true);
-
         Debug.Log("Player chose option " + i);
         if (!dialogueController.GetCurrentNode().IsEndNode())
         {
+            int index = i;
+            if (i == 0) index = 1;
+            else index = 0;
+            if (!choices[index].GetComponent<Button>().interactable && !nextButton.activeInHierarchy)
+            {
+                i = index;
+                Debug.Log("Player chose option " + i);
+            }
             dialogueController.ChooseResponse(i);
         }
         else

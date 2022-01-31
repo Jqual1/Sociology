@@ -64,7 +64,10 @@ public class DialogueBoxController : MonoBehaviour
 
     public void HideDialogue()
     {
-        StopCoroutine(dialogueCo);
+        if (dialogueCo != null)
+        {
+            StopCoroutine(dialogueCo);
+        }
         typingComplete = true;
 
         CloseBox();
