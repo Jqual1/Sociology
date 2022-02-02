@@ -12,9 +12,13 @@ Chapter1
 :: Intro[START]
 Welcome to itsmaya, an exploration into the variety of decisions that will affect the life of Maya, a black girl growing up in the public school system.
 You will have the opportunity to pick policies that are dependent on and will affect the support of several groups, including Maya. 
+These groups are the Teachers, Faculty, Parents, Students, and Community. Without their support, you will be unable to enact certain policies.
+These policies cause immediate change in support, and can allow access to options later on that would otherwise be unavailable. 
 Your goal is to give Maya the best support possible while maintaing relationships with your supporting groups.
 Do what you feel is right, and try to make the best of the system that's in place. Good luck!
 Next[[TeacherTraining]]
+
+
 
 :: Policy[Policy]
 Next[[TT]]
@@ -24,7 +28,6 @@ As the school year draws to a close and the weather is getting warmer, it's time
 As the Principal for Rock Creek Elementary School, people rely on you to make some tough decisions.
 If the state government has provided you with the necessary policies, your options will be more flexible.
 If an option is ever unavailable, there is a corresponding policy at the state level that was not purchased.
-...
 Next[[Policy]]
 
 :: TT[Character H]

@@ -2015,6 +2015,7 @@ MonoBehaviour:
   - {fileID: 1064943797}
   - {fileID: 1349451101}
   - {fileID: 1627277184}
+  relationsImage: {fileID: 812321099}
 --- !u!82 &265593639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14073,6 +14074,7 @@ MonoBehaviour:
   post3PNG: {fileID: 1802124973}
   post4PN: {fileID: 1309643929}
   post4G: {fileID: 1633751044}
+  relationsImage: {fileID: 812321099}
   feedbackButtons:
   - {fileID: 1777560474}
   - {fileID: 2056688735}

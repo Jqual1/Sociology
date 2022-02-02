@@ -11,6 +11,7 @@ public class PolicyController : MonoBehaviour
     public DialogueViewer dialogueViewer;
     public Sprite[] notBoughtImages;
     public GameObject[] policyButtons;
+    public GameObject relationsImage;
 
     private Dictionary<int, int> imageDict = new Dictionary<int, int>()
     {
@@ -50,6 +51,7 @@ public class PolicyController : MonoBehaviour
         {
             policyButtons[i].GetComponent<Image>().sprite = notBoughtImages[imageDict[i]];
         }
+        relationsImage.SetActive(true);
     }
 
     public void ClosePolicy()
@@ -58,6 +60,8 @@ public class PolicyController : MonoBehaviour
         staticElements.SetActive(false);
         StartCoroutine(OnAnimationComplete());
         GameController.Instance.ToggleCapitalChange();
+        relationsImage.SetActive(false);
+
     }
 
     // https://gamedev.stackexchange.com/questions/117423/unity-detect-animations-end

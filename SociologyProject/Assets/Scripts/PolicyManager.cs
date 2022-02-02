@@ -161,7 +161,7 @@ public class PolicyManager : MonoBehaviour
         string explanation = "";
         if (badRelations)
         {
-             explanation = "You cannot enact this policy since relations with " + reason + " are too low.";
+             explanation = "You cannot enact this policy since support of " + reason + " is too low.";
         }
         else
         {
