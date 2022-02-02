@@ -199,7 +199,7 @@ public class PolicyManager : MonoBehaviour
         policyTextBox.GetComponent<TextMeshProUGUI>().text = "";
         if (badPurchase)
         {
-            Color c = new Color(.9f, 18f/255f, 64f/255f, 1);
+            Color c = new Color(233f/255f, 98f/255f, 98f/255f, 1);
             policyTextBox.GetComponent<TextMeshProUGUI>().color = c;
             badPurchase = false;
         }
