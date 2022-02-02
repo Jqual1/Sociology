@@ -45,7 +45,7 @@ public class PolicyController : MonoBehaviour
         
         policyAnimator.SetBool("isOpen", true);
         staticElements.SetActive(true);
-        GameController.Instance.ToggleCapitalChange();
+        GameController.Instance.ToggleCapitalChange(false);
         dialogueViewer.HideDialogue();
         for (int i = 0; i < 9; i++)
         {
@@ -59,7 +59,7 @@ public class PolicyController : MonoBehaviour
         policyAnimator.SetBool("isOpen", false);
         staticElements.SetActive(false);
         StartCoroutine(OnAnimationComplete());
-        GameController.Instance.ToggleCapitalChange();
+        GameController.Instance.ToggleCapitalChange(true);
         relationsImage.SetActive(false);
 
     }
