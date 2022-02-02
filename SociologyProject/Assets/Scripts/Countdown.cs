@@ -17,7 +17,7 @@ public class Countdown : MonoBehaviour
         {
             CountdownBox.GetComponentInChildren<TextMeshProUGUI>().text = "Choose: " + duration + "s";
             CountdownBox.SetActive(true);
-            Debug.Log("Time Start");
+            //Debug.Log("Time Start");
             isCountingDown = true;
             r = false;
             timeRemaining = duration;
@@ -38,7 +38,7 @@ public class Countdown : MonoBehaviour
             CountdownBox.GetComponentInChildren<TextMeshProUGUI>().text = "Choose: " + duration + "s";
             CountdownBox.SetActive(false);
             isCountingDown = false;
-            Debug.Log("Time's Up!");
+            //Debug.Log("Time's Up!");
             if (!r)
             {
                 int randomInt = Random.Range(0, 2);

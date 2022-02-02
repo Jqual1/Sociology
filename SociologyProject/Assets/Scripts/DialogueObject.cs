@@ -151,7 +151,7 @@ public class DialogueObject
                         else
                             curResponse.displayText = curResponseData.Substring(0, destinationStart);
                         curNode.responses.Add(curResponse);
-                        Debug.Log("Resp: " + curResponse.displayText);
+                        //Debug.Log("Resp: " + curResponse.displayText);
                     }
                 }
 

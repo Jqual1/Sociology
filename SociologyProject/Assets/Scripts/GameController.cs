@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
     public Sprite doubleD, singleD, noChange, singleU, doubleU;
     public int[] capArr;
     public GameObject capitalScreen;
-    private bool capChangeBool = false;
 
     public int progress;
     public GameObject mainMenu;
@@ -188,8 +187,7 @@ public class GameController : MonoBehaviour
         {
             capArr[i] = 50;
         }
-        capChangeBool = true;
-        ToggleCapitalChange();
+        ToggleCapitalChange(true);
         UpdateCapital();
         policyManager.policyPReset();
 	}
@@ -377,7 +375,7 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-    public void ToggleCapitalChange()
+    public void ToggleCapitalChange(bool capChangeBool)
 	{
         Image[] capEmoChaArr = new Image[] { teaCha, facCha, parCha, stuCha, comCha };
         for (int i = 0; i < 5; i++)
@@ -391,12 +389,11 @@ public class GameController : MonoBehaviour
                 capEmoChaArr[i].transform.gameObject.SetActive(true);
             }
         }
-        capChangeBool = !capChangeBool;
     }
 
 	public void ChangeProgress(int[] amount)
     {
-        Debug.Log(amount[0]);
+        //Debug.Log(amount[0]);
         progress += amount[0];
     }
 
@@ -457,7 +454,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                Debug.Log("VALUE " + action.Value);
+                //Debug.Log("VALUE " + action.Value);
                 ChangeProgress(action.Value);
             }
         }
