@@ -1986,6 +1986,21 @@ MonoBehaviour:
   policyAnimator: {fileID: 638358609}
   staticElements: {fileID: 2067720600}
   dialogueViewer: {fileID: 1288752450}
+  notBoughtImages:
+  - {fileID: 21300000, guid: ae5fc858dcf8b5c4da6fe90ee35aa207, type: 3}
+  - {fileID: 21300000, guid: 2355875359b7ec442ad94a4871a477f1, type: 3}
+  - {fileID: 21300000, guid: cc7dfe979eda71347aee7637bc234488, type: 3}
+  policyButtons:
+  - {fileID: 1628082544}
+  - {fileID: 333947304}
+  - {fileID: 1349495662}
+  - {fileID: 1230962158}
+  - {fileID: 1922017271}
+  - {fileID: 1690986604}
+  - {fileID: 1064943797}
+  - {fileID: 1349451101}
+  - {fileID: 1627277184}
+  relationsImage: {fileID: 812321099}
 --- !u!82 &265593639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4766,7 +4781,15 @@ MonoBehaviour:
   - {fileID: 1064943797}
   - {fileID: 1349451101}
   - {fileID: 1627277184}
-  purchaseButton: {fileID: 1017020508}
+  enactButton: {fileID: 1017020508}
+  notBoughtImages:
+  - {fileID: 21300000, guid: ae5fc858dcf8b5c4da6fe90ee35aa207, type: 3}
+  - {fileID: 21300000, guid: 2355875359b7ec442ad94a4871a477f1, type: 3}
+  - {fileID: 21300000, guid: cc7dfe979eda71347aee7637bc234488, type: 3}
+  BoughtImages:
+  - {fileID: 21300000, guid: 31fb54447c5d61f4a85d0b4574c7be7e, type: 3}
+  - {fileID: 21300000, guid: 9628929b3c51fbe499e9c3cd990c8f4d, type: 3}
+  - {fileID: 21300000, guid: 2326bcd8f44869e4eb69228673ba99ba, type: 3}
   policyPurchased: 00000000000000000000000000
 --- !u!4 &564080771
 Transform:
@@ -10765,18 +10788,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 265593638}
-        m_TargetAssemblyTypeName: PolicyController, Assembly-CSharp
-        m_MethodName: ClosePolicy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 564080770}
         m_TargetAssemblyTypeName: PolicyManager, Assembly-CSharp
         m_MethodName: resetPickedThisRound
@@ -14048,6 +14059,7 @@ MonoBehaviour:
   post3PNG: {fileID: 1802124973}
   post4PN: {fileID: 1309643929}
   post4G: {fileID: 1633751044}
+  relationsImage: {fileID: 812321099}
   feedbackButtons:
   - {fileID: 1777560474}
   - {fileID: 2056688735}
