@@ -21,9 +21,13 @@ public class PolicyManager : MonoBehaviour
 
     private int openPolicy;
     public GameObject[] policyButtons;
-    public GameObject purchaseButton;
+    public GameObject enactButton;
+    public Sprite[] notBoughtImages;
+    public Sprite[] BoughtImages;
 
     private bool policyPurchasedThisRound = false;
+    private bool badPurchase = false;
+    private int highlightedPolicyNumber = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -62,9 +66,11 @@ public class PolicyManager : MonoBehaviour
         {"IQ testing",                              "Use IQ testing to select kids for gift education services"}
     };
 
+    private List<String> capitals = new List<String>() { "Teachers", "Faculty", "Parents", "Students", "Community" };
+
     private int[,] policyCostN = new int[,] {
     // { teachers, faculty, parents, students, community, Maya}
-      { 5, -5, 10, -10, 5, 10 },   // Extended Bus Routes
+      { 5, -5, 10, -100, 5, 10 },   // Extended Bus Routes
       { 10, -5, 5, 10, -5, 15 },   // Voucher System
       { 15, 5, 15, 15, 0, 15 },   // FAFSA
       { -10, -10, -15, 10, -5, 10 },   // Career and Technical Education Program
@@ -77,6 +83,20 @@ public class PolicyManager : MonoBehaviour
       { 5, 15, -5, -25, 10, -20 },   // Zero Tolerance Disciplin
       { -10, 0, 10, 10, -10, 10 },   // Critical Conversation Space
       { 15, -5, -10, 10, 10, 15 }   // IQ testing
+    };
+
+    private Dictionary<int, int> imageDict = new Dictionary<int, int>()
+    {
+        [0] = 0,
+        [1] = 1,
+        [2] = 2,
+        [3] = 2,
+        [4] = 0,
+        [5] = 1,
+        [6] = 1,
+        [7] = 2,
+        [8] = 0
+
     };
 
     private int[] policyBenefit = new int[] { 1, 1, 2, 2, 2, 3, 2, 2, -1}; //Need to reavaluate these and double check them with progress requirements
@@ -92,7 +112,7 @@ public class PolicyManager : MonoBehaviour
             policyButton.GetComponent<Image>().color = Color.white;
             resetPickedThisRound();
 		}
-        purchaseButton.SetActive(false);
+        enactButton.SetActive(false);
     }
 
     public string getPolicyTitle(int policyNumber) { return policy[policyNumber, 0]; }
@@ -104,38 +124,68 @@ public class PolicyManager : MonoBehaviour
         bool canBuy = true;
         int[] currentCapital = GameController.Instance.capArr;
         int[] policyCapitalCost = GetRow(policyCostN, openPolicy);
+        string tooLow = "";
         for(int i = 0; i<5; i++)
         {
             if (policyCapitalCost[i] < 0)
             {
                 if (policyCapitalCost[i]*-1 > currentCapital[i])
                 {
+                    tooLow = capitals[i];
                     canBuy = false;
                     break;
                 }
             }
         }
-        if (canBuy && !policyPurchasedThisRound)
+        if (canBuy && !policyPurchasedThisRound && !policyPurchased[openPolicy])
         {
             GameController.Instance.ChangeCapital(GetRow(policyCostN, openPolicy));
             GameController.Instance.ChangeProgress(new int[] { policyBenefit[openPolicy] });
             policyPurchased[openPolicy] = true;
+            
             ColorUtility.TryParseHtmlString("#737373", out Color color);
             policyButtons[openPolicy].GetComponent<Image>().color = color;
             policyPurchasedThisRound = true;
+            policyCanvas.GetComponent<PolicyController>().ClosePolicy();
+        }
+        else if (policyPurchased[openPolicy])
+        {
+            ExplainNoPurchase("You cannot purchase the same policy more than once!", false);
+        }
+        else if (!canBuy){
+            ExplainNoPurchase(tooLow, true);
         }
     }
-
+    public void ExplainNoPurchase(string reason, Boolean badRelations)
+    {
+        string explanation = "";
+        if (badRelations)
+        {
+             explanation = "You cannot enact this policy since support of " + reason + " is too low.";
+        }
+        else
+        {
+             explanation = reason;
+        }
+        badPurchase = true;
+        StopAllCoroutines();
+        dialogueCo = StartCoroutine(typeText(explanation));
+    }
     public void activePolicy(int policyNumber)
     {
         openPolicy = policyNumber;
     }
 
     public void PolicyClicked(int policyNumber)
-    {
+    {   if (highlightedPolicyNumber != -1)
+        {
+            policyButtons[highlightedPolicyNumber].GetComponent<Image>().sprite = notBoughtImages[imageDict[highlightedPolicyNumber]];
+        }
         StartDialogue(getPolicyDescription(policyNumber));
         GameController.Instance.UpdateChangeCap(GetRow(policyCostN, policyNumber));
-        purchaseButton.SetActive(true);
+        policyButtons[policyNumber].GetComponent<Image>().sprite = BoughtImages[imageDict[policyNumber]];
+        highlightedPolicyNumber = policyNumber;
+        enactButton.SetActive(true);
     }
 
     public void StartDialogue(string text)
@@ -147,6 +197,17 @@ public class PolicyManager : MonoBehaviour
     IEnumerator typeText(string text)
     {
         policyTextBox.GetComponent<TextMeshProUGUI>().text = "";
+        if (badPurchase)
+        {
+            Color c = new Color(.9f, 18f/255f, 64f/255f, 1);
+            policyTextBox.GetComponent<TextMeshProUGUI>().color = c;
+            badPurchase = false;
+        }
+        else
+        {
+            policyTextBox.GetComponent<TextMeshProUGUI>().color = Color.white;
+
+        }
         foreach (char c in text.ToCharArray())
         {
 
@@ -155,7 +216,7 @@ public class PolicyManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(.03f);
+            yield return new WaitForSeconds(.015f);
         }
     }
     public bool IsActive(string title)

@@ -41,6 +41,7 @@ public class DialogueViewer : MonoBehaviour
     public GameObject post3PNG;
     public GameObject post4PN;
     public GameObject post4G;
+    public GameObject relationsImage;
 
     public GameObject[] feedbackButtons;
     public GameObject nextButton;
@@ -104,6 +105,7 @@ public class DialogueViewer : MonoBehaviour
 
         if (node.tags.Contains("PreCutScene"))
         {
+            relationsImage.SetActive(false);
             ClearPosts();
             Debug.Log("Chapter Index: " + curChapterIndex);
             if (GameController.Instance.progress <3)
@@ -179,16 +181,22 @@ public class DialogueViewer : MonoBehaviour
         if (node.tags.Contains("Policy"))
         {
             dialogueBoxController.HideDialogue();
-
+            relationsImage.SetActive(true);
             policyController.OpenPolicy();
         }
         if (node.tags.Contains("Character"))
         {
+            relationsImage.SetActive(true);
             OpenCharacters(node);
             Debug.Log("Character Pop-Up!");
         }
-        if (node.title == "Intro")
+        if (node.tags.Contains("END"))
         {
+            relationsImage.SetActive(false);
+        }
+            if (node.title == "Intro")
+        {
+            relationsImage.SetActive(false);
             intro.SetActive(true);
             Debug.Log("Intro");
         }
@@ -223,6 +231,7 @@ public class DialogueViewer : MonoBehaviour
         }
         else
         {
+            relationsImage.SetActive(false);
             cutSceneController.CloseCutScene();
             Debug.Log("Entering next chapter");
             NextChapter();
