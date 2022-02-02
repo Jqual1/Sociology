@@ -10,9 +10,11 @@ Chapter2
 
 
 :: Intro[START]
-Evidence shows that black girls are often disciplined for being "loud", "disruptive" and "disrespectful". They recieve more suspensions than other white and latinx female students.
+Evidence shows that Black girls are often disciplined for being "loud", "disruptive" and "disrespectful". They recieve more suspensions than other white and latinx female students.
 Culteral Competency training and positive behavior support are great ways to help prevent this issue. 
-...
+Next[[Welcome]]
+
+::Welcome[]
 Welcome to Chapter 2.
 You are now playing as a student coordinator for Rock Creek Middle School.
 It is your job to communicate with the faculty. 

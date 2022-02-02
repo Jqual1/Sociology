@@ -42,6 +42,7 @@ public class DialogueViewer : MonoBehaviour
     public GameObject post4PN;
     public GameObject post4G;
     public GameObject relationsImage;
+    public GameObject feedbackText;
 
     public GameObject[] feedbackButtons;
     public GameObject nextButton;
@@ -178,6 +179,18 @@ public class DialogueViewer : MonoBehaviour
                 }
             }
         }
+        if (node.tags.Contains("capital"))
+        {
+            intro.SetActive(true);
+            relationsImage.SetActive(true);
+
+        }
+        if (node.tags.Contains("notcapital"))
+        {
+            intro.SetActive(false);
+            relationsImage.SetActive(false);
+
+        }
         if (node.tags.Contains("Policy"))
         {
             dialogueBoxController.HideDialogue();
@@ -213,6 +226,7 @@ public class DialogueViewer : MonoBehaviour
 
     public void OnNodeSelected(int i)
     {
+        feedbackText.GetComponent<TextMeshProUGUI>().text = "";
         ClearCharacters();
         HideAllChoices();
         dialogueBoxController.dialogueSide.SetActive(true);
@@ -231,7 +245,6 @@ public class DialogueViewer : MonoBehaviour
         }
         else
         {
-            relationsImage.SetActive(false);
             cutSceneController.CloseCutScene();
             //Debug.Log("Entering next chapter");
             NextChapter();

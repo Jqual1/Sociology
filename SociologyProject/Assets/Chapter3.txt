@@ -10,11 +10,13 @@ Chapter3
 
 
 :: Intro[START]
-Forcing uniforms and dress codes onto students often have a negative impact on students. Females, especially black females, are especially impacted by this. 
+Forcing uniforms and dress codes onto students often have a negative impact on students. Females, especially Black females, are especially impacted by this. 
 Black girls are often disciplined for wearing inappropriate clothing while someone of another race may be ignored while wearing the same thing.
 Culteral Competency training allows for teachers to learn more about their implicit biases and allow them to better communicate and understand other cultures.
 This helps create a stronger connection between students and teachers, reduces unnecessary punishment, and prevent negative actions by students.
-...
+Next[[Welcome]]
+
+:: Welcome[]
 Welcome to Chapter 3.
 You are now playing as the Superintendent for Rock Creek School District.
 You will be making larger, more executive decisions for the district.
