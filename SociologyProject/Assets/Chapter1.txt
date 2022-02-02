@@ -10,7 +10,7 @@ Chapter1
 
 
 :: Intro[START]
-Welcome to itsmaya, an exploration into the variety of decisions that will affect the life of Maya, a Black girl growing up in the public school system.
+Welcome to @itsmaya, an exploration into the variety of decisions that will affect the life of Maya, a Black girl growing up in the public school system.
 You will have the opportunity to pick policies that are dependent on and will affect the support of several groups, including Maya. 
 Next[[introtwo]]
 
