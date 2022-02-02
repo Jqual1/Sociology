@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PolicyController : MonoBehaviour
 {
@@ -8,6 +9,22 @@ public class PolicyController : MonoBehaviour
     public GameObject staticElements;
 
     public DialogueViewer dialogueViewer;
+    public Sprite[] notBoughtImages;
+    public GameObject[] policyButtons;
+
+    private Dictionary<int, int> imageDict = new Dictionary<int, int>()
+    {
+        [0] = 0,
+        [1] = 1,
+        [2] = 2,
+        [3] = 2,
+        [4] = 0,
+        [5] = 1,
+        [6] = 1,
+        [7] = 2,
+        [8] = 0
+
+    };
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +41,15 @@ public class PolicyController : MonoBehaviour
 
     public void OpenPolicy()
     {
+        
         policyAnimator.SetBool("isOpen", true);
         staticElements.SetActive(true);
         GameController.Instance.ToggleCapitalChange();
         dialogueViewer.HideDialogue();
+        for (int i = 0; i < 9; i++)
+        {
+            policyButtons[i].GetComponent<Image>().sprite = notBoughtImages[imageDict[i]];
+        }
     }
 
     public void ClosePolicy()
