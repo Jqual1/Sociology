@@ -24,9 +24,9 @@ public class PolicyText : MonoBehaviour
 
     public void PolicyClicked()
     {
-        Debug.Log(policyIndex);
+        //Debug.Log(policyIndex);
         StartDialogue(PolicyManager.Instance.getPolicyDescription(policyIndex));
-        Debug.Log("hey I know the Policy Number: " + policyIndex);
+        //Debug.Log("hey I know the Policy Number: " + policyIndex);
     }
 
     IEnumerator typeText(string text)

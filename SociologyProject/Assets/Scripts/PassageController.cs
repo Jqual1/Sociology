@@ -40,7 +40,7 @@ public class PassageController : MonoBehaviour
     public void Next()
     {
         string nextChunk = chunks[++currentIndex];
-        Debug.Log(nextChunk);
+        //Debug.Log(nextChunk);
         onEnteredChunk(nextChunk);
     }
 }

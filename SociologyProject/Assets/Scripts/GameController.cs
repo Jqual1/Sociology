@@ -396,7 +396,7 @@ public class GameController : MonoBehaviour
 
 	public void ChangeProgress(int[] amount)
     {
-        Debug.Log(amount[0]);
+        //Debug.Log(amount[0]);
         progress += amount[0];
     }
 
@@ -457,7 +457,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                Debug.Log("VALUE " + action.Value);
+                //Debug.Log("VALUE " + action.Value);
                 ChangeProgress(action.Value);
             }
         }

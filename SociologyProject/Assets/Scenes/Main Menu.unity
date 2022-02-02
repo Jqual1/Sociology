@@ -645,7 +645,6 @@ GameObject:
   - component: {fileID: 100994053}
   - component: {fileID: 100994052}
   - component: {fileID: 100994051}
-  - component: {fileID: 100994050}
   m_Layer: 5
   m_Name: SourcesCanvas
   m_TagString: Untagged
@@ -673,20 +672,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &100994050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100994048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8744ad0188b914cac9997826a3804343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background: {fileID: 0}
-  textBox: {fileID: 0}
 --- !u!114 &100994051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14066,6 +14051,7 @@ MonoBehaviour:
   feedbackButtons:
   - {fileID: 1777560474}
   - {fileID: 2056688735}
+  nextButton: {fileID: 36448916}
 --- !u!114 &1288752451
 MonoBehaviour:
   m_ObjectHideFlags: 0

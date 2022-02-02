@@ -70,7 +70,7 @@ public class DialogueManager : MonoBehaviour
         dialogueCanvas.enabled = true;
         mainMenu.enabled = false;
         GameManager.Instance.cutscene.SetActive(true);
-        Debug.Log("cutsceen is active");
+        //Debug.Log("cutsceen is active");
         // cut scene dialogue
 
         //transition to chapter 1 background
@@ -211,7 +211,7 @@ public class DialogueManager : MonoBehaviour
             
             if(optionIndex.Contains(currentTextTracker))
             {
-                Debug.Log("contains");
+                //Debug.Log("contains");
                 choiceSide.SetActive(true);
                 dialogueSide.SetActive(false);
             }
@@ -219,7 +219,7 @@ public class DialogueManager : MonoBehaviour
             {
                 GameManager.Instance.chapteronebackground.SetActive(true);
                 GameManager.Instance.cutscene.SetActive(false);
-                Debug.Log("first chapter change");
+                //Debug.Log("first chapter change");
             }
             if(currentTextTracker == 24 ){
                 GameManager.Instance.cutscene.SetActive(true);
@@ -263,13 +263,13 @@ public class DialogueManager : MonoBehaviour
             }
             currentTextTracker++;
             OpenBox();
-            Debug.Log(currentTextTracker);
+            //Debug.Log(currentTextTracker);
         }
     }
 
     public void testButton2()
     {
-        Debug.Log(chapter1Dialogue[6]);
+        //Debug.Log(chapter1Dialogue[6]);
     }
 
     public void NextTextcutscene()

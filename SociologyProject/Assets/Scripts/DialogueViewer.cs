@@ -73,7 +73,7 @@ public class DialogueViewer : MonoBehaviour
 
         curChapterIndex = 0;
         dialogueController.InitializeDialogue(chapters[curChapterIndex]);
-        Debug.Log("Initialized dialogue");
+        //Debug.Log("Initialized dialogue");
         foreach( GameObject background in backgrounds)
 		{
             background.SetActive(false);
@@ -105,7 +105,7 @@ public class DialogueViewer : MonoBehaviour
         if (node.tags.Contains("PreCutScene"))
         {
             ClearPosts();
-            Debug.Log("Chapter Index: " + curChapterIndex);
+            //Debug.Log("Chapter Index: " + curChapterIndex);
             if (GameController.Instance.progress <3)
             {
                 Response newResponse = new Response();
@@ -185,12 +185,12 @@ public class DialogueViewer : MonoBehaviour
         if (node.tags.Contains("Character"))
         {
             OpenCharacters(node);
-            Debug.Log("Character Pop-Up!");
+            //Debug.Log("Character Pop-Up!");
         }
         if (node.title == "Intro")
         {
             intro.SetActive(true);
-            Debug.Log("Intro");
+            //Debug.Log("Intro");
         }
         passageController.InitializePassage(node);
         // Actions
@@ -198,7 +198,7 @@ public class DialogueViewer : MonoBehaviour
         if (policy != null)
         {
             
-            Debug.Log("Activating policy: " + policy.name);
+            //Debug.Log("Activating policy: " + policy.name);
             GameController.Instance.ActivatePolicy(policy);
         }
     }
@@ -208,7 +208,7 @@ public class DialogueViewer : MonoBehaviour
         ClearCharacters();
         HideAllChoices();
         dialogueBoxController.dialogueSide.SetActive(true);
-        Debug.Log("Player chose option " + i);
+        //Debug.Log("Player chose option " + i);
         if (!dialogueController.GetCurrentNode().IsEndNode())
         {
             int index = i;
@@ -217,14 +217,14 @@ public class DialogueViewer : MonoBehaviour
             if (!choices[index].GetComponent<Button>().interactable && !nextButton.activeInHierarchy)
             {
                 i = index;
-                Debug.Log("Player chose option " + i);
+                //Debug.Log("Player chose option " + i);
             }
             dialogueController.ChooseResponse(i);
         }
         else
         {
             cutSceneController.CloseCutScene();
-            Debug.Log("Entering next chapter");
+            //Debug.Log("Entering next chapter");
             NextChapter();
         }
     }
@@ -237,7 +237,7 @@ public class DialogueViewer : MonoBehaviour
             dialogueBoxController.HideDialogue(); //
             cutSceneController.DisplayText(chunk);
 
-            Debug.Log("Entered chunk with text: " + chunk);
+            //Debug.Log("Entered chunk with text: " + chunk);
         } 
         else if ( policy ) 
         {
@@ -264,13 +264,13 @@ public class DialogueViewer : MonoBehaviour
                 countdown.Begin();
                 foreach(Response r in dialogueController.GetCurrentNode().responses)
                 {
-                    Debug.Log(r.displayText);
+                    //Debug.Log(r.displayText);
                 }
                 ShowChoices(dialogueController.GetCurrentNode().responses);
-                Debug.Log("Reached responses: ");
+                //Debug.Log("Reached responses: ");
                 foreach (Response response in dialogueController.GetCurrentNode().responses)
                 {
-                    Debug.Log(response.displayText);
+                    //Debug.Log(response.displayText);
                 }
             }
             else { OnNodeSelected(0);} // Move on to next node
@@ -292,25 +292,25 @@ public class DialogueViewer : MonoBehaviour
         {
             // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
             var index = responses.Count - (i + 1);
-            Debug.Log("Index: " + index);
+            //Debug.Log("Index: " + index);
             choices[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = responses[responses.Count - (i + 1)].displayText;
-            Debug.Log(responses[responses.Count - (i + 1)].displayText);
+            //Debug.Log(responses[responses.Count - (i + 1)].displayText);
             string policyName = responses[responses.Count - (i + 1)].destinationNode;
             Policy policy = GameController.Instance.FindPolicy(policyName);
-            Debug.Log("HERE");
-            Debug.Log(policyName);
+            //Debug.Log("HERE");
+            //Debug.Log(policyName);
             if (!GameController.Instance.IsAvailable(policyName))
             {
-                Debug.Log("Does Not Work");
+                //Debug.Log("Does Not Work");
                 choices[i].GetComponent<Button>().interactable = false;
                 feedbackButtons[i].GetComponent<Button>().interactable = false;
                 if (policy.feedback != "")
                 {
                     feedbackButtons[i].SetActive(true);
                     feedbackButtons[i].GetComponent<Feedback>().text = policy.feedback;
-                    Debug.Log(policy.feedback);
-                    Debug.Log(feedbackButtons[i]);
-                    Debug.Log(i);
+                    //Debug.Log(policy.feedback);
+                    //Debug.Log(feedbackButtons[i]);
+                    //Debug.Log(i);
                 }
                 
             }

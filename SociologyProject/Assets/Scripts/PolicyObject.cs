@@ -23,7 +23,7 @@ public class PolicyObject
         for (int i = 1; i < policyData.Length; i++)
         {
             string[] policyDetails = policyData[i].Split(new string[] { "," }, StringSplitOptions.None);
-            Debug.Log("prereq " + policyDetails[2]);
+            //Debug.Log("prereq " + policyDetails[2]);
             string policyName = policyDetails[0];
             int policyCost = Int32.Parse(policyDetails[1]);
 
@@ -54,7 +54,7 @@ public class PolicyObject
 
             }
             policy.feedback = feedback;
-            Debug.Log("Assigned feedback: " + policy.feedback);
+            //Debug.Log("Assigned feedback: " + policy.feedback);
 
             policies.Add(policy);
         }
